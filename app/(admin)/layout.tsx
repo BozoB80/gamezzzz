@@ -4,6 +4,7 @@ import Sidebar from "@/components/admin/Sidebar";
 
 import "../globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const font = Anek_Gujarati({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function AuthLayout({
               <Sidebar />
               {children}
             </main>
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

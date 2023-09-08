@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mongodb"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Billboard {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  label     String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+
+  categories Category[]
+}
+
+model Category {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+
+  billboardId String    @db.ObjectId
+  billboard   Billboard @relation(fields: [billboardId], references: [id])
+  games       Game[]    @relation("CategoryToGame")
+
+  @@index([billboardId])
+}
+
+model Game {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  features    String?
+  bannerImg   String?
+  logoImg     String?
+  titleImg    String?
+  images      Image[]
+  releaseDate Int
+  price       Float
+  discount    Int?
+  rating      Float?
+  developer   String?
+  size        Float?
+  categoryId  String      @db.ObjectId
+  category    Category    @relation("CategoryToGame", fields: [categoryId], references: [id])
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Image {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  gameId    String   @db.ObjectId
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  isPaid    Boolean
+  phone     String   @default("")
+  address   String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orderItems OrderItem[]
+}
+
+model OrderItem {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  orderId String @db.ObjectId
+  order   Order  @relation(fields: [orderId], references: [id])
+  gameId  String @db.ObjectId
+  game    Game   @relation(fields: [gameId], references: [id])
+
+  @@index([orderId])
+  @@index([gameId])
+}
