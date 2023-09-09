@@ -17,7 +17,7 @@ const Sidebar = () => {
 
   return (
     <section className="sticky left-0 top-0 h-screen z-20 w-fit flex flex-col justify-between overflow-auto border-r-primary-foregroundry border-r-2 py-5 max-md:hidden">
-      <Link href="/" className="lg:flex justify-center pb-5 md:hidden">
+      <Link href="/admin" className="lg:flex justify-center pb-5 md:hidden">
         <Image
           src={"/logo.png"}
           alt="logo"

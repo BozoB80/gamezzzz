@@ -43,9 +43,9 @@ model Game {
   releaseDate Int
   price       Float
   discount    Int?
-  rating      Float?
+  rating      Float
   developer   String?
-  size        Float?
+  size        Float
   categoryId  String      @db.ObjectId
   category    Category    @relation("CategoryToGame", fields: [categoryId], references: [id])
   orderItems  OrderItem[]

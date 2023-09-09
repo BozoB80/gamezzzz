@@ -55,12 +55,12 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ initialData, billboards }) 
     try {
       setLoading(true)
       if (initialData) {
-        await axios.patch(`/api/${params.storeId}/categories/${params.categoryId}`, data)
+        await axios.patch(`/api/categories/${params.categoryId}`, data)
       } else {
-        await axios.post(`/api/${params.storeId}/categories`, data)
+        await axios.post(`/api/categories`, data)
       }
       router.refresh()
-      router.push(`/${params.storeId}/categories`)
+      router.push(`/admin/categories`)
       toast({ description: toastMessage })
       
     } catch (error) {
@@ -74,9 +74,9 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ initialData, billboards }) 
   const onDelete = async () => {
      try {
       setLoading(true)
-      await axios.delete(`/api/${params.storeId}/categories/${params.categoryId}`)
+      await axios.delete(`/api/categories/${params.categoryId}`)
       router.refresh()
-      router.push(`/${params.storeId}/categories`)
+      router.push(`/admin/categories`)
       toast({ description: "Billboard deleted" })
       
      } catch (error) {

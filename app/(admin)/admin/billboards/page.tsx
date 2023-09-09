@@ -17,8 +17,8 @@ const BillboardsPage = async () => {
   }))
 
   return (
-    <div className="w-full flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
+    <div className="flex-1 flex-col">
+      <div className="space-y-4 p-8 pt-6">
         <BillboardClient data={formattedBillboards} />
       </div>
     </div>

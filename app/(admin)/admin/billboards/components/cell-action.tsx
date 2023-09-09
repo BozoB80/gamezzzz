@@ -7,8 +7,9 @@ import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
-import AlertModal from "@/components/modals/AlertModal";
+
 import { useToast } from "@/components/ui/use-toast"
+import AlertModal from "@/components/modals/AlertModal";
 
 
 interface CellActionProps {
@@ -32,7 +33,7 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onDelete = async () => {
     try {
      setLoading(true)
-     await axios.delete(`/api/admin/billboards/${data.id}`)
+     await axios.delete(`/api/billboards/${data.id}`)
      router.refresh()
      toast({description: "Billboard deleted."})
     } catch (error) {
