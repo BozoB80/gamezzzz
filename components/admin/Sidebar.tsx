@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
-import { sidebarLinks } from "@/app/constants";
+import { sidebarLinks } from "@/constants";
 import { LogOut } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { ThemeToggle } from "../ThemeToggle";
@@ -13,7 +13,6 @@ import { ThemeToggle } from "../ThemeToggle";
 const Sidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { userId } = useAuth();
 
   return (
     <section className="sticky left-0 top-0 h-screen z-20 w-fit flex flex-col justify-between overflow-auto border-r-primary-foregroundry border-r-2 py-5 max-md:hidden">

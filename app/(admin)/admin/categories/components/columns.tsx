@@ -43,7 +43,7 @@ export const columns: ColumnDef<CategoryColumn>[] = [
     cell: ({ row }) => row.original.billboardLabel
   },
   {
-    id: "createdAt",
+    accessorKey: "createdAt",
     header: "Date"
   },
   {

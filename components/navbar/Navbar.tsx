@@ -3,8 +3,12 @@ import Link from "next/link";
 
 import { MainNav } from "./MainNav";
 import NavRight from "./NavRight";
+import prismadb from "@/lib/prismadb";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const games = await prismadb.game.findMany()
+  const categories = await prismadb.category.findMany()
+
 
   return (
     <nav className="border-b bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 shadow-xl">
@@ -18,7 +22,7 @@ const Navbar = () => {
             className="cursor-pointer"
           />
         </Link>
-        <MainNav />
+        <MainNav games={games} categories={categories} />
         <NavRight />       
       </div>
     </nav>

@@ -27,3 +27,26 @@ export const sidebarLinks = [
     label: "Orders",
   },  
 ];
+
+export const mobileNavLinks = [
+  {
+    icon: LayoutDashboard,
+    route: "/",
+    label: "Discover",
+  },
+  {
+    icon: Swords,
+    route: "/games",
+    label: "Games",
+  },  
+  {
+    icon: Globe,
+    route: "/categories",
+    label: "Categories",
+  },  
+  {
+    icon: Store,
+    route: "/orders",
+    label: "Orders",
+  },  
+];

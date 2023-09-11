@@ -4,6 +4,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import { ThemeToggle } from "../ThemeToggle";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import MobileMenu from "./MobileMenu";
 
 const NavRight = () => {
   const { user } = useUser();
@@ -21,20 +22,23 @@ const NavRight = () => {
         </Button>
       )}
       <ThemeToggle />
-      {user ? (
-        <UserButton afterSignOutUrl="/" />
-      ) : (
-        <div>
-          <p>{}</p>
-          <Button
-            variant="link"
-            onClick={() => router.push("/sign-in")}
-            className="border-black text-black text-md font-medium"
-          >
-            My account
-          </Button>
-        </div>
-      )}
+
+      <div className="max-lg:hidden">
+        {user ? (
+          <UserButton afterSignOutUrl="/" />
+        ) : (
+          <div>
+            <Button
+              variant="link"
+              onClick={() => router.push("/sign-in")}
+              className="border-black text-black text-md font-medium"
+            >
+              My account
+            </Button>
+          </div>
+        )}
+      </div>
+      <MobileMenu />
     </div>
   );
 };
