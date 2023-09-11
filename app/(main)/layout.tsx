@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Anek_Gujarati } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import Navbar from '@/components/navbar/Navbar'
+import { NextUiProvider } from '@/components/providers/NextUiProvider'
 
 const font = Anek_Gujarati({ subsets: ['latin'] })
 
@@ -23,8 +24,10 @@ export default function RootLayout({
       <html lang="en">
         <body className={font.className}>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            <NextUiProvider>
             <Navbar />
             {children}
+            </NextUiProvider>
           </ThemeProvider>
         </body>
       </html>
