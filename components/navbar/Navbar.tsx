@@ -7,7 +7,14 @@ import prismadb from "@/lib/prismadb";
 
 const Navbar = async () => {
   const games = await prismadb.game.findMany()
-  const categories = await prismadb.category.findMany()
+  const categories = await prismadb.category.findMany({
+    include: {
+      billboard: true
+    },
+    orderBy: {
+      name: "asc"
+    }
+  })
 
 
   return (

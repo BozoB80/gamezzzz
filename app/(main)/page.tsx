@@ -1,7 +1,4 @@
-import TestComp from "@/components/TestComp"
 import prismadb from "@/lib/prismadb"
-
-
 
 export default async function Home() {
   const games = await prismadb.game.findMany({
@@ -10,7 +7,7 @@ export default async function Home() {
 
   return (
     <main>
-      <TestComp games={games} />
+      Main page
     </main>
   )
 }

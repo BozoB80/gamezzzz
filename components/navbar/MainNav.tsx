@@ -8,19 +8,18 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { Category, Game } from "@prisma/client";
+import { Billboard, Category, Game } from "@prisma/client";
 import Image from "next/image";
 import { Card, CardContent } from "../ui/card";
 import { useRouter } from "next/navigation";
 import { Separator } from "../ui/separator";
-import { NavigationMenuSub } from "@radix-ui/react-navigation-menu";
+import {Card as NextCard, CardFooter, Image as NextImage} from "@nextui-org/react";
 
 interface MainNavProps {
   games: Game[]
-  categories: Category[]
+  categories: (Category & { billboard: Billboard })[]
 }
 
 export const MainNav = ({ games, categories }: MainNavProps) => {  
@@ -108,7 +107,7 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
             CATEGORIES
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="relative flex flex-col justify-center items-start p-3 w-64 space-y-2">
+            <div className="relative flex flex-col justify-center items-start p-3 w-full space-y-2">
               <Link href="/categories" legacyBehavior passHref className="font-semibold">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Browse all categories
@@ -116,26 +115,31 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
               </Link>
               <Separator />
 
-              <NavigationMenuSub defaultValue="Action">
-                <NavigationMenuList className="flex flex-col items-start">
-                  {categories.map((category) => (
-                    <NavigationMenuItem key={category.id} value={category.name} className="flex">
-                      <NavigationMenuTrigger>{category.name}</NavigationMenuTrigger>
-                      <NavigationMenuContent>Content</NavigationMenuContent>
-                    </NavigationMenuItem>
-                  ))}
-                </NavigationMenuList>
-              </NavigationMenuSub>
-                
-              {/* {categories.map((category) => (
-                <NavigationMenuItem key={category.name}>
-                  <NavigationMenuTrigger>{category.name}</NavigationMenuTrigger>
-                  <NavigationMenuContent>Content</NavigationMenuContent>
-                </NavigationMenuItem>
-              ))} */}
+              <div className="p-3 grid grid-cols-4 w-[600px] gap-6">                
+                {categories.map((category) => (                  
+                    <NextCard 
+                      key={category.id}
+                      isFooterBlurred
+                      shadow="md"
+                      isPressable
+                      onPress={() => router.push(`/categories/${category.id}`)}
+                      className="border-none"
+                    >
+                      <NextImage 
+                        src={category.billboard.imageUrl}
+                        alt={category.billboard.label}
+                        width={400}
+                        height={400}
+                        className="aspect-square object-cover opacity-100 rounded-lg"
+                      />
+                      <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                        <p className="w-full text-white">{category.name}</p>
+                      </CardFooter>               
+                    </NextCard>
+                ))}
+              </div>
              
-            </div>
-           
+            </div>           
           </NavigationMenuContent>
         </NavigationMenuItem>
 
