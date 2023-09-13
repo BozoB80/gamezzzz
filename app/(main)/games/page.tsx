@@ -1,18 +1,44 @@
-import Container from "@/components/Container";
 import GamesList from "@/components/GamesList";
+import PriceFilters from "@/components/PriceFilters";
+import SortingFilters from "@/components/SortingFilters";
 import prismadb from "@/lib/prismadb";
 
-const GamesPage = async () => {
-  const games = await prismadb.game.findMany({
+interface GamesPageProps {
+  searchParams: {
+    categoryId: string
+    priceId: string
+  }
+}
+
+const GamesPage = async ({ searchParams }: GamesPageProps) => {
+  const priceId = parseInt(searchParams.priceId, 10);
+
+  let games = await prismadb.game.findMany({
+    where: {
+      categoryId: searchParams.categoryId,
+    },
     include: {
-      images: true
-    }
-  }) 
+      images: true,
+    },
+  });
+  
+  if (!isNaN(priceId)) {
+    games = games.filter((game) => game.price === priceId);
+  }
+
+  const categories = await prismadb.category.findMany()
 
   return (
-    <Container>
-      <GamesList title="Explore our top games" games={games}  />
-    </Container>
+    <div className="relative max-w-7xl mx-auto p-1 sm:p-4 xl:p-0">
+      <h1 className="text-7xl font-bold text-center my-3">Explore our top games</h1>
+      <div className="flex mx-auto">
+        <div className="flex flex-col">
+          <SortingFilters name="Genres" data={categories} valueKey="categoryId" />
+          <PriceFilters name="Price" data={games} valueKey="price" selectedValue={searchParams.priceId} />
+        </div>
+        <GamesList games={games} />
+      </div>
+    </div>
   );
 }
 

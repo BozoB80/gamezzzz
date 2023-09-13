@@ -54,7 +54,7 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
             <CardTitle className="text-xl">{game.title}</CardTitle>
 
             <Separator className="my-2" />
-            <CardFooter className="flex justify-between items-center text-lg p-0">
+            <CardFooter className="flex justify-between items-center text-base p-0">
               <p>
                 <span className="text-sm">Release date:</span>{" "}
                 {game.releaseDate}.

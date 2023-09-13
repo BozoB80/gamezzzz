@@ -73,7 +73,7 @@ body,
   .card {
     perspective: 1000px; /* Defines the 3D space for the card flip */
     transform-style: preserve-3d;
-    transition: transform 0.5s; /* Add a smooth transition for the flip effect */
+    transition: transform 0.8s; /* Add a smooth transition for the flip effect */
   }
   
   /* The flipped class rotates the card on the X-axis to reveal the back */

@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/select";
 
 import { Separator } from "@/components/ui/separator";
-
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -323,7 +322,7 @@ const GameForm: React.FC<GamesFormProps> = ({ initialData, categories }) => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {Array.from({ length: 14 }, (_, index) => 2010 + index).map(
+                    {Array.from({ length: 25 }, (_, index) => 1999 + index).map(
                       (year) => (
                         <SelectItem key={year} value={year.toString()}>
                           {year}

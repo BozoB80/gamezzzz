@@ -1,15 +1,18 @@
 import CategoriesMain from "@/components/CategoriesMain";
 import prismadb from "@/lib/prismadb";
 
-const CategoriesPage = () => {
-  const categories = prismadb.category.findMany({
+const CategoriesPage = async () => {
+  const categories = await prismadb.category.findMany({
     include: {
       billboard: true
+    },
+    orderBy: {
+      name: "asc"
     }
   })
 
   return (
-    <div className="bg-secondary">
+    <div className="bg-cat-bg bg-cover bg-no-repeat bg-center">
       <CategoriesMain categories={categories} />
     </div>
   );
