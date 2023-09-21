@@ -5,6 +5,7 @@ import { ThemeToggle } from "../ThemeToggle";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import MobileMenu from "./MobileMenu";
+import { ShieldCheck } from "lucide-react";
 
 const NavRight = () => {
   const { user } = useUser();
@@ -14,10 +15,11 @@ const NavRight = () => {
     <div className="ml-auto flex items-center space-x-4">
       {user?.username === "admin_b" && (
         <Button
-          variant="link"
+          variant="ghost"
           onClick={() => router.push("/admin")}
-          className="border-black text-black text-md font-medium"
+          className="border-black text-black text-md font-medium uppercase"
         >
+          <ShieldCheck className="h-6 w-6 mr-2" />
           Admin
         </Button>
       )}

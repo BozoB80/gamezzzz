@@ -73,6 +73,8 @@ module.exports = {
       backgroundImage: {
         "hero-bg": "url('/games-bg.jpg')",
         "cat-bg": "url('/cat-bg.jpg')",
+        "catid-bg": "url('/pxfuel.jpg')",
+        "games-bg": "url('/gamers.webp')",
       },
     },
   },

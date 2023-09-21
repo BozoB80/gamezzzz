@@ -33,7 +33,7 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
   return (
     <Link href={`/games/${game.id}`}>
       <Card
-        className={`h-full group cursor-pointer shadow-xl ${
+        className={`h-full group cursor-pointer shadow-xl border-none ${
           isFlipped ? "card flipped" : ""
         }`}
         onMouseEnter={handleCardFlip}
