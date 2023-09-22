@@ -10,7 +10,7 @@ export default async function Home() {
 
   return (
     <main className="w-full h-full">
-      <div className="max-w-7xl mx-auto py-10">
+      <div className="max-w-[1500px] mx-auto py-10">
         <Carousel
           games={games}
         />
