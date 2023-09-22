@@ -16,15 +16,19 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Heart } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { Badge } from "./ui/badge";
 
 interface GameCardProps {
   game: Game & {
     images?: Images[];
   };
+  isDeals?: boolean
 }
 
-const GameCard: React.FC<GameCardProps> = ({ game }) => {
+const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const discountedPrice = game.discount ? game.price - (game.price * game.discount / 100) : game.price;
 
   const handleCardFlip = () => {
     setIsFlipped(!isFlipped);
@@ -51,16 +55,27 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
             </div>
           </CardHeader>
           <CardContent className="mt-4 flex flex-col justify-between">
-            <CardTitle className="text-xl">{game.title}</CardTitle>
+            <CardTitle className={cn("text-xl", isDeals && "truncate")}>{game.title}</CardTitle>
 
             <Separator className="my-2" />
             <CardFooter className="flex justify-between items-center text-base p-0">
-              <p>
-                <span className="text-sm">Release date:</span>{" "}
-                {game.releaseDate}.
-              </p>
+              {isDeals ? (
+                  <Badge variant="destructive" className="text-sm">
+                  - {game.discount} %
+                  </Badge>           
+              ) : (
+                <p>
+                  <span className="text-sm">Release date:</span>{" "}
+                  {game.releaseDate}.
+                </p>
+              )}
+              {isDeals && (
+                <Badge variant="secondary" className="text-sm line-through">                    
+                  € {game.price.toFixed(2)}
+                </Badge>
+              )}
               <p className="bg-yellow-400 px-3 py-1 rounded-md font-semibold">
-                € {game.price.toFixed(2)}
+                € {discountedPrice.toFixed(2)}
               </p>
             </CardFooter>
           </CardContent>

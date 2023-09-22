@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "./ui/card";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface CarouselProps {
   games: Game[];
@@ -12,6 +13,7 @@ interface CarouselProps {
 
 const Carousel = ({ games }: CarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter()
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -28,11 +30,12 @@ const Carousel = ({ games }: CarouselProps) => {
   const currentMonth = new Date().toLocaleString('en-US', { month: 'long'})
 
   return (
-    <div className="relative flex items-center h-full">
+    <div className="relative flex items-center h-full pb-10">
       {games.slice(0, 5).map((game, index) => (
         <div
           key={index}
-          className={`opacity-0 transition-all ${
+          onClick={() => router.push(`games/${game.id}`)}
+          className={`opacity-0 transition-all cursor-pointer ${
             index === currentSlide ? "opacity-100 h-full transition" : ""
           }`}
         >
@@ -45,7 +48,7 @@ const Carousel = ({ games }: CarouselProps) => {
               className="w-full h-[550px] object-cover rounded-lg transition"
             />
           )}
-          <div className="absolute bottom-14 left-14 flex flex-col uppercase text-white">
+          <div className="absolute bottom-24 left-14 flex flex-col uppercase text-white">
             <h3 className="text-2xl font-semibold capitalize">Gamezzzz Store</h3>
             <h1 className="text-4xl font-bold text-primary">{currentMonth}</h1>
             <h1 className="text-7xl font-bold mb-6 text-primary">Savings</h1>
