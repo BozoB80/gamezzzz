@@ -8,7 +8,7 @@ interface GamesListProps {
 
 const GamesList: React.FC<GamesListProps> = ({ games }) => {
   return (
-    <div className="mx-auto">      
+    <div className="w-full">      
       {games.length === 0 && <NoResluts />}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {games.map((game) => (

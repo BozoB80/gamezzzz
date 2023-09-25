@@ -15,13 +15,13 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 4,
     slidesToSlide: 2 // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
-    slidesToSlide: 1 // optional, default to 1.
+    items: 2,
+    slidesToSlide: 2 // optional, default to 1.
   }
 };
 
@@ -30,11 +30,12 @@ interface DealsGamesProps {
 }
 
 const DealsGames = ({ games }: DealsGamesProps) => {
+  const currentMonth = new Date().toLocaleString('en-US', { month: 'long'})
 
   return (
     <div className="">
       <div>
-        <h1 className="text-2xl font-medium mb-4">September Savings Spotlight</h1>
+        <h1 className="text-2xl font-medium mb-4">{currentMonth} Savings Spotlight</h1>
         
       </div>
       <Carousel

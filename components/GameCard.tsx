@@ -54,29 +54,29 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
               />
             </div>
           </CardHeader>
-          <CardContent className="mt-4 flex flex-col justify-between">
-            <CardTitle className={cn("text-xl", isDeals && "truncate")}>{game.title}</CardTitle>
+          <CardContent className="mt-4 flex flex-col justify-between px-1 sm:px-3">
+            <CardTitle className={cn("text-xl truncate", isDeals && "truncate")}>{game.title}</CardTitle>
 
             <Separator className="my-2" />
             <CardFooter className="flex justify-between items-center text-base p-0">
               {isDeals ? (
-                  <Badge variant="destructive" className="text-sm">
-                  - {game.discount} %
+                  <Badge variant="destructive" className="text-xs sm:text-sm px-2">
+                  -{game.discount}%
                   </Badge>           
               ) : (
                 <p>
-                  <span className="text-sm">Release date:</span>{" "}
+                  <span className="text-xs sm:text-sm">Release date:</span>{" "}
                   {game.releaseDate}.
                 </p>
               )}
               {isDeals && (
-                <Badge variant="secondary" className="text-sm line-through">                    
+                <Badge variant="secondary" className="text-xs sm:text-sm line-through px-2">                    
                   € {game.price.toFixed(2)}
                 </Badge>
               )}
-              <p className="bg-yellow-400 px-3 py-1 rounded-md font-semibold">
+                <Badge variant="secondary" className="text-xs sm:text-sm bg-yellow-400 px-2">                    
                 € {discountedPrice.toFixed(2)}
-              </p>
+                </Badge>
             </CardFooter>
           </CardContent>
         </div>

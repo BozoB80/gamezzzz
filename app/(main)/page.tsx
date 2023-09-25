@@ -22,13 +22,11 @@ export default async function Home() {
 
   return (
     <main className="w-full h-full">
-      <div className="max-w-[1500px] mx-auto flex flex-col py-10">
+      <div className="max-w-[1500px] mx-auto flex flex-col p-2 sm:p-4 lg:py-10 xl:px-8 2xl:px-0">
         <Carousel
           games={games}
         />
         <DealsGames games={dealsGames} />
-
-
       </div>
     </main>
   )

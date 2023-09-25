@@ -1,5 +1,6 @@
 import GamesList from "@/components/GamesList";
 import PriceFilters from "@/components/PriceFilters";
+import { SearchInput } from "@/components/SearchInput";
 import SortingFilters from "@/components/SortingFilters";
 import prismadb from "@/lib/prismadb";
 
@@ -7,24 +8,20 @@ interface GamesPageProps {
   searchParams: {
     categoryId: string;
     priceId: string;
+    title: string
   };
 }
 
 const GamesPage = async ({ searchParams }: GamesPageProps) => {
-  const priceId = parseInt(searchParams.priceId, 10);
-
+ 
   let games = await prismadb.game.findMany({
     where: {
       categoryId: searchParams.categoryId,
-    },
-    include: {
-      images: true,
+      title: {
+        contains: searchParams.title
+      }
     },
   });
-
-  if (!isNaN(priceId)) {
-    games = games.filter((game) => game.price === priceId);
-  }
 
   const categories = await prismadb.category.findMany();
 
@@ -34,7 +31,10 @@ const GamesPage = async ({ searchParams }: GamesPageProps) => {
         <h1 className="text-7xl font-bold text-center my-3">
           Explore our top games
         </h1>
-        <div className="flex mx-auto">
+        <div className="flex justify-between items-center">
+          <SearchInput />
+        </div>
+        <div className="flex gap-x-4">
           <div className="flex flex-col">
             <SortingFilters
               name="Genres"
