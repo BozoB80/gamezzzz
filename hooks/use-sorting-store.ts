@@ -19,10 +19,12 @@ const useSortingStore = create<SortingStoreState>((set) => ({
     set((state) => {
       const sortedGames = [...state.games]
       sortedGames.sort((a, b) => {
+        const discA = a.discount ? a.price - (a.price * a.discount / 100) : a.price
+        const discB = b.discount ? b.price - (b.price * b.discount / 100) : b.price
         if (order === 'asc') {
-          return a.price - b.price;
+          return discA  - discB;
         } else {
-          return b.price - a.price;
+          return discB - discA;
         }
       });
       return { sortedGames };

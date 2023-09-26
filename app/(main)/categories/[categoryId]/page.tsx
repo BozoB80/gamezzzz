@@ -9,7 +9,7 @@ interface CategoryNameProps {
   };
   searchParams: {
     categoryId: string;
-    priceId: string;
+    price: string;
   };
 }
 
@@ -53,10 +53,7 @@ const CategoryIdPage = async ({ params, searchParams }: CategoryNameProps) => {
         <div className="flex mx-auto">
           <div className="flex flex-col">
             <PriceFilters
-              name="Price"
-              data={games}
               valueKey="price"
-              selectedValue={searchParams.priceId}
             />
           </div>
           <GamesList games={games} />

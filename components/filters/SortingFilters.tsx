@@ -15,7 +15,6 @@ const SortingFilters = ({ data }: SortingFiltersProps) => {
   const [sortOption, setSortOption] = useState<string>("default");
 
   useEffect(() => {
-    // When the 'data' prop changes, update the 'games' in the Zustand store
     setGames(data);
   }, [data, setGames]);
 
@@ -34,9 +33,6 @@ const SortingFilters = ({ data }: SortingFiltersProps) => {
     }
     // You may add a case for "default" to reset sorting to the initial state if needed.
   };
-  
-  console.log(sortedGames);
-  
 
   return (
     <div className="text-black">
