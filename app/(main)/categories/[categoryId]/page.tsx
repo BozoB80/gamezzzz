@@ -1,6 +1,6 @@
 import Billboard from "@/components/Billboard";
 import GamesList from "@/components/GamesList";
-import PriceFilters from "@/components/PriceFilters";
+import PriceFilters from "@/components/filters/PriceFilters";
 import prismadb from "@/lib/prismadb";
 
 interface CategoryNameProps {

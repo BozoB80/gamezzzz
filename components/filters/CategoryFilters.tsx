@@ -3,24 +3,25 @@
 import { cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
-import { Game } from "@prisma/client";
+import { Category } from "@prisma/client";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
+} from "../ui/accordion";
 
 interface FilterProps {
-  data: Game[];
+  data: Category[];
   name: string;
   valueKey: string;
-  selectedValue: string;
 }
 
-const PriceFilters: React.FC<FilterProps> = ({ data, name, valueKey, selectedValue }) => {
+const CategoryFilters: React.FC<FilterProps> = ({ data, name, valueKey }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
+
+  const selectedValue = searchParams.get(valueKey);
 
   const onClick = (id: string) => {
     const current = queryString.parse(searchParams.toString());
@@ -61,7 +62,7 @@ const PriceFilters: React.FC<FilterProps> = ({ data, name, valueKey, selectedVal
                 selectedValue === filter.id && "bg-primary text-black font-semibold hover:text-secondary rounded-lg"
               )}
             >
-              <p>{filter.price}</p>
+              <p>{filter.name}</p>
             </div>
           ))}
         </AccordionContent>
@@ -70,4 +71,4 @@ const PriceFilters: React.FC<FilterProps> = ({ data, name, valueKey, selectedVal
   );
 };
 
-export default PriceFilters;
+export default CategoryFilters;

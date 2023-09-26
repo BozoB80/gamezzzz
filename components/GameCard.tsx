@@ -71,11 +71,11 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
               )}
               {isDeals && (
                 <Badge variant="secondary" className="text-xs sm:text-sm line-through px-2">                    
-                  € {game.price.toFixed(2)}
+                  €{game.price.toFixed(2)}
                 </Badge>
               )}
-                <Badge variant="secondary" className="text-xs sm:text-sm bg-yellow-400 px-2">                    
-                € {discountedPrice.toFixed(2)}
+                <Badge variant="secondary" className="text-xs sm:text-sm lg:text-lg bg-yellow-400 px-2">                    
+                €{discountedPrice.toFixed(2)}
                 </Badge>
             </CardFooter>
           </CardContent>
