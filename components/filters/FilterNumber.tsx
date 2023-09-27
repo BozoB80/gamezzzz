@@ -15,7 +15,7 @@ const FilterNumber = () => {
   };
 
   return (
-    <div className="flex gap-x-12 justify-between items-center border-b">
+    <div className="flex gap-x-6 lg:gap-x-12 justify-between items-center border-b">
       <div className="flex justify-center items-center gap-x-2">
         <p>Filters</p>
         <p>({paramsCount})</p>
@@ -23,6 +23,7 @@ const FilterNumber = () => {
       <Button
         variant="ghost"
         size="sm"
+        disabled={paramsCount === 0}
         onClick={resetSearchParams}
         className="hover:bg-black hover:text-muted-foreground"
       >
