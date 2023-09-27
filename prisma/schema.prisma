@@ -50,9 +50,11 @@ model Game {
   categoryId  String      @db.ObjectId
   category    Category    @relation("CategoryToGame", fields: [categoryId], references: [id])
   orderItems  OrderItem[]
+  purchases   Purchase[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
+  @@index([categoryId])
   @@fulltext([title])
 }
 
@@ -85,4 +87,27 @@ model OrderItem {
 
   @@index([orderId])
   @@index([gameId])
+}
+
+model Purchase {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String
+
+  gameId String @db.ObjectId
+  game   Game   @relation(fields: [gameId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, gameId])
+  @@index([gameId])
+}
+
+model StripeCustomer {
+  id               String @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String @unique
+  stripeCustomerId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
