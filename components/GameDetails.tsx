@@ -10,6 +10,7 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
+import AddToCartButton from "./AddToCartButton";
 
 interface GameDetailsProps {
   game: Game & {
@@ -88,12 +89,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
             </CardTitle>
             <Separator className="my-4" />
             <CardContent className="w-full p-0">
-              <Button
-                size="lg"
-                className="w-full font-semibold text-lg"
-              >
-                Add to cart
-              </Button>
+              <AddToCartButton game={game} />
               <div className="flex justify-center items-center py-4 gap-2">
                 <Heart />
                 <p className="text-semibold">Wishlist it</p>

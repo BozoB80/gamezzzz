@@ -1,11 +1,13 @@
 "use client";
 
 import { UserButton, useUser } from "@clerk/nextjs";
-import { ThemeToggle } from "../ThemeToggle";
+
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 import { ShieldCheck } from "lucide-react";
+import { ThemeToggle } from "../ThemeToggle";
+import NavCart from "./NavCart";
 
 const NavRight = () => {
   const { user } = useUser();
@@ -24,6 +26,7 @@ const NavRight = () => {
         </Button>
       )}
       <ThemeToggle />
+      <NavCart />
 
       <div className="max-lg:hidden">
         {user ? (
