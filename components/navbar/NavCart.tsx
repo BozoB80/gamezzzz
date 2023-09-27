@@ -23,7 +23,7 @@ const NavCart = () => {
     <div className="ml-auto flex items-center gap-x-4">
       <Button variant="ghost" onClick={() => router.push('/cart')} className="relative flex items-center rounded-full px-4 py-2">
         <ShoppingCart size={24} color="black" />
-        <span className="absolute top-0 right-1 text-sm font-semibold px-1.5 rounded-full bg-destructive">
+        <span className="absolute top-0 right-1 text-sm font-semibold pt-0.5 px-1.5 rounded-full bg-destructive">
           {cart.items.length}
         </span>
       </Button>

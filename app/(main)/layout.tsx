@@ -6,6 +6,7 @@ import { Anek_Gujarati } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import Navbar from '@/components/navbar/Navbar'
 import { NextUiProvider } from '@/components/providers/NextUiProvider'
+import { Toaster } from '@/components/ui/toaster'
 
 const font = Anek_Gujarati({ subsets: ['latin'] })
 
@@ -28,6 +29,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             </NextUiProvider>
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
