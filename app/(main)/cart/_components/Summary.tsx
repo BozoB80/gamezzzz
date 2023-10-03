@@ -42,13 +42,13 @@ const Summary = () => {
       <h2 className="text-4xl font-medium ">Order Summary</h2>
       <div className="mt-6 space-y-4">
         <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-          <div className="text-base font-medium">
+          <div className="text-xl font-medium">
             Order Total
           </div>
-          <h1>{totalPrice}</h1>
+          <h1 className="text-xl font-medium">€{totalPrice.toFixed(2)}</h1>
         </div>
       </div>
-      <Button disabled={items.length === 0} size="lg" onClick={onCheckout} className="w-full text-xl mt-6">
+      <Button disabled={items.length === 0} size="lg" onClick={onCheckout} className="w-full text-xl font-semibold mt-6">
         Checkout
       </Button>
     </div>

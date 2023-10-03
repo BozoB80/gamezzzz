@@ -43,12 +43,12 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
         <NavigationMenuItem>
           <NavigationMenuTrigger>STORE</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-6 min-w-[900px] lg:grid-cols-4">
-              <li className="row-span-3 group">
+            <div className="grid gap-3 p-6 min-w-[900px] lg:grid-cols-4">
+              <div className="row-span-2 group">
                 <NavigationMenuLink asChild>
                   <Link
                     href="/games"
-                    className="flex h-full w-full select-none flex-col justify-center rounded-md bg-hero-bg bg-cover bg-no-repeat bg-center p-6 no-underline outline-none focus:shadow-md"
+                    className="flex w-full h-full select-none flex-col justify-center rounded-md bg-hero-bg bg-cover bg-no-repeat bg-center p-6 no-underline outline-none focus:shadow-md"
                   >
                     <div className="mb-10 mt-4 text-xl font-medium text-white group-hover:scale-110 transition">
                       Browse all games
@@ -58,7 +58,7 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
                     </p>
                   </Link>
                 </NavigationMenuLink>
-              </li>
+              </div>
               {games.slice(0, 6).map((game) => {
                 const discountedPrice = game.discount
                   ? game.price - (game.price * game.discount) / 100
@@ -70,7 +70,7 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
                     onClick={() => router.push(`/games/${game.id}`)}
                     className="group cursor-pointer"
                   >
-                    <CardContent className="flex flex-col justify-between items-center h-full p-0 overflow-hidden">
+                    <CardContent className="flex flex-col justify-between items-center p-0 overflow-hidden">
                       {game.titleImg ? (
                         <div className="overflow-hidden flex">
                           <Image
@@ -112,7 +112,7 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
                   </Card>
                 );
               })}
-            </ul>
+            </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
