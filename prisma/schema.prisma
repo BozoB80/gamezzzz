@@ -50,7 +50,6 @@ model Game {
   categoryId  String      @db.ObjectId
   category    Category    @relation("CategoryToGame", fields: [categoryId], references: [id])
   orderItems  OrderItem[]
-  purchases   Purchase[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
@@ -69,6 +68,7 @@ model Image {
 
 model Order {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
   isPaid    Boolean
   phone     String   @default("")
   address   String   @default("")
@@ -80,26 +80,13 @@ model Order {
 
 model OrderItem {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String
   orderId String @db.ObjectId
   order   Order  @relation(fields: [orderId], references: [id])
   gameId  String @db.ObjectId
   game    Game   @relation(fields: [gameId], references: [id])
-
+  
   @@index([orderId])
-  @@index([gameId])
-}
-
-model Purchase {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String
-
-  gameId String @db.ObjectId
-  game   Game   @relation(fields: [gameId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@unique([userId, gameId])
   @@index([gameId])
 }
 

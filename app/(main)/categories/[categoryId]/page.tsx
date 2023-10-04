@@ -50,7 +50,7 @@ const CategoryIdPage = async ({ params, searchParams }: CategoryNameProps) => {
   }
 
   return (
-    <div className="bg-catid-bg bg-cover bg-no-repeat bg-center h-full">
+    <div className="bg-catid-bg bg-cover bg-no-repeat bg-center min-h-screen">
       <div className="relative max-w-7xl mx-auto p-1 sm:p-4 xl:px-0 xl:py-4 text-white space-y-6">
         <h1 className="text-6xl font-medium text-start pt-4">
           {category.name} Games

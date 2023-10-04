@@ -24,19 +24,27 @@ export async function POST(req: Request) {
 
   const session = event.data.object as Stripe.Checkout.Session;
   const userId = session?.metadata?.userId;
-  const gameId = session?.metadata?.gameId;
+  const orderId = session?.metadata?.orderId;
 
   if (event.type === "checkout.session.completed") {
-    if (!userId || !gameId) {
+    if (!userId || !orderId) {
       return new NextResponse(`Webhook Error: Missing metadata`, { status: 400 });
     }
 
-    await prismadb.purchase.create({
+    await prismadb.order.update({
+      where: {
+        id: orderId
+      },
       data: {
-        gameId: gameId,
-        userId: userId,
+        isPaid: true,
+        address: session?.customer_details?.address?.city || "",
+        phone: session?.customer_details?.phone || ""
+      },
+      include: {
+        orderItems: true
       }
-    });
+    })
+
   } else {
     return new NextResponse(`Webhook Error: Unhandled event type ${event.type}`, { status: 200 })
   }

@@ -106,7 +106,7 @@ body,
     position: relative;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden; /* Hide the backface of the front element */
+    backface-visibility: hidden; /* Hide the backface of the front element */    
   }
   
   .card-inner-back {

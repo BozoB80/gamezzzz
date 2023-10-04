@@ -12,7 +12,7 @@ const CategoriesPage = async () => {
   })
 
   return (
-    <div className="bg-cat-bg bg-cover bg-no-repeat bg-center">
+    <div className="bg-cat-bg bg-cover bg-no-repeat bg-center min-h-screen">
       <CategoriesMain categories={categories} />
     </div>
   );

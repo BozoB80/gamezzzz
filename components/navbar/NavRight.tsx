@@ -29,7 +29,7 @@ const NavRight = () => {
       <NavCart />
 
       <div className="max-lg:hidden">
-        {user ? (
+        {user ? (  
           <UserButton afterSignOutUrl="/" />
         ) : (
           <div>

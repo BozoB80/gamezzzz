@@ -13,11 +13,11 @@ import { Game, Image as Images } from "@prisma/client";
 import Image from "next/image";
 import { Separator } from "./ui/separator";
 import { useState } from "react";
-import { Button } from "./ui/button";
 import { Heart } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Badge } from "./ui/badge";
+import AddToCartButton from "./AddToCartButton";
 
 interface GameCardProps {
   game: Game & {
@@ -90,12 +90,9 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
           </CardHeader>
           <CardContent>
             <Separator className="my-2" />
-            <Button
-              size="lg"
-              className="w-full font-semibold text-lg"
-            >
-              Add to cart
-            </Button>
+            <AddToCartButton game={game} onClick={(e) => {
+      e.stopPropagation(); // Prevent propagation to parent Card
+    }} />
             <div className="flex justify-center items-center py-4 gap-2">
               <Heart />
               <p className="text-semibold">Add to wishlist</p>

@@ -57,7 +57,7 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
         </div>
 
         <div className="flex justify-between items-center">
-          <p className="text-white/70">Rating: {data.rating}</p>
+          <p className="text-white/70 max-sm:hidden">Rating: {data.rating}</p>
           <div className="flex justify-center items-center gap-3 text-lg text-white/80">
             {data.discount ? (
               <Badge className="text-sm">-{data.discount}%</Badge>

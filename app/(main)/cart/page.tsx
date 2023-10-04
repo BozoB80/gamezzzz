@@ -4,7 +4,7 @@ import useCart from "@/hooks/use-cart";
 import { useState, useEffect } from "react";
 import CartItem from "./_components/CartItem";
 import Summary from "./_components/Summary";
-import { HeartCrack } from "lucide-react";
+import { ShoppingBasket } from "lucide-react";
 import Link from "next/link";
 
 
@@ -18,10 +18,7 @@ const CartPage = () => {
 
   if (!isMounted) {
     return null;
-  }
-
-  console.log(cart);
-  
+  }  
 
   return (
     <div className="bg-games-bg bg-cover bg-no-repeat bg-center min-h-screen">
@@ -29,7 +26,7 @@ const CartPage = () => {
         <h1 className="text-5xl font-bold text-white">My Cart</h1>
           {cart.items.length === 0 ? (
             <div className="w-full h-full flex flex-col justify-center items-center text-white space-y-8">
-              <HeartCrack size={80} color="gray" fill="red" />
+              <ShoppingBasket size={80} />
               <h1 className="text-5xl">Your cart is empty!</h1>
               <Link href="/" className="text-xl text-white/60 underline underline-offset-4 hover:text-white hover:underline">
                 Shop for our finest selection
