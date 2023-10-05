@@ -12,7 +12,7 @@ import { Button } from "./ui/button";
 
 interface FilterBarProps {
   games: Game[]
-  categories: Category[]
+  categories?: Category[]
 }
 
 const FilterBar = ({ games, categories }: FilterBarProps) => {
@@ -37,7 +37,9 @@ const FilterBar = ({ games, categories }: FilterBarProps) => {
               <div className="flex flex-col justify-between items-center mt-4">
                 <div className="flex flex-col justify-between items-center w-full">
                   <SearchInput />
-                  <CategoryFilters name="Genres" data={categories} valueKey="categoryId" />
+                  {categories && categories.length > 0 && (
+                    <CategoryFilters name="Genres" data={categories} valueKey="categoryId" />
+                  )}
                   <PriceFilters valueKey="price" />
                 </div>
               </div>
