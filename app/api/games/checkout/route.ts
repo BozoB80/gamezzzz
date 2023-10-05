@@ -57,16 +57,18 @@ export async function POST(
       }
     })
 
-    const purchasedGameId = purchased?.orderItems.map((item) => item.gameId)
+    const purchasedGameId = purchased?.orderItems.map((item) => item.gameId) || []
 
-    // const purchasedGames = await prismadb.game.findMany({
-    //   where: {
-    //     id: purchasedGameId
-    //   }
-    // })
+    const purchasedGames = await prismadb.game.findMany({
+      where: {
+        id: {
+          in: purchasedGameId
+        }
+      }
+    })
 
     if (purchased) {
-      return new NextResponse(`${purchasedGameId} is already`, { status: 400 });
+      return new NextResponse(`${purchasedGames.map((game) => game.title)} is already`, { status: 400 });
     }
 
     if (!games) {
