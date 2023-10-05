@@ -9,6 +9,7 @@ interface SortingStoreState {
   sortDataByPrice: (order: SortOrder) => void;
   sortDataByDate: (order: SortOrder) => void;
   setGames: (games: Game[]) => void
+  resetSorting: () => void;
 }
 
 const useSortingStore = create<SortingStoreState>((set) => ({
@@ -49,6 +50,12 @@ const useSortingStore = create<SortingStoreState>((set) => ({
 
   setGames: (games) => {
     set({ games });
+  },
+
+  resetSorting: () => {
+    set((state) => {
+      return { sortedGames: [...state.games] };
+    });
   },
 
 }));

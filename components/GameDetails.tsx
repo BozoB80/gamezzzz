@@ -27,7 +27,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
 
   return (
     <Container>
-      <div className="w-96 h-56 sticky top-10 left-10 z-10">
+      <div className="hidden md:block md:w-60 md:h-32 xl:w-96 xl:h-56 sticky top-10 left-10 z-10">
         {game.logoImg && (
           <Image
             src={game.logoImg}
@@ -45,7 +45,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
             alt="banner"
             width={1000}
             height={1000}
-            className="w-full h-[550px] object-cover overflow-hidden shadow-2xl"
+            className="w-full h-[250px] md:h-[470px] xl:h-[550px] object-cover overflow-hidden shadow-2xl"
           />
         )}
         {user?.username === "admin_b" && 
@@ -59,7 +59,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
         }  
       </div>
 
-      <div className="relative max-w-7xl mx-auto mt-80 mb-5 flex justify-between">
+      <div className="relative max-w-7xl mx-auto mt-64 md:mt-80 mb-5 flex max-md:flex-col justify-between">
         <div className="flex flex-col justify-center items-start">
           <p className="text-4xl font-bold">{game.title}</p>
           <div className="flex justify-start items-start gap-4">
@@ -70,39 +70,38 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
           </div>
         </div>
 
-        <div>
-          <Card className="w-96 -mt-20 px-4 py-2 rounded-sm">
-            <CardTitle className="flex justify-start items-end pt-2">
-              {!game.discount ? (
-                <p className="text-3xl">€ {game.price.toFixed(2)}</p>
-              ) : (
-                <div className="flex justify-between items-center w-full">
-                  <Badge variant="destructive" className="text-3xl">
-                    <p>-{game.discount}%</p>
-                  </Badge>
-                  <h1 className="text-3xl font-normal line-through text-muted-foreground">
-                    € {game.price.toFixed(2)}
-                  </h1>
-                  <h1 className="text-3xl">€ {discountedPrice?.toFixed(2)}</h1>
-                </div>
-              )}
-            </CardTitle>
-            <Separator className="my-4" />
-            <CardContent className="w-full p-0">
-              <AddToCartButton game={game} />
-              <div className="flex justify-center items-center py-4 gap-2">
-                <Heart />
-                <p className="text-semibold">Wishlist it</p>
+      
+        <Card className="w-full md:w-96 md:-mt-20 px-4 py-2 rounded-sm bg-gray-100">
+          <CardTitle className="flex justify-start items-end pt-2">
+            {!game.discount ? (
+              <p className="text-3xl">€ {game.price.toFixed(2)}</p>
+            ) : (
+              <div className="flex justify-between items-center w-full">
+                <Badge variant="destructive" className="text-3xl">
+                  <p>-{game.discount}%</p>
+                </Badge>
+                <h1 className="text-3xl font-normal line-through text-muted-foreground">
+                  € {game.price.toFixed(2)}
+                </h1>
+                <h1 className="text-3xl">€ {discountedPrice?.toFixed(2)}</h1>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            )}
+          </CardTitle>
+          <Separator className="my-4" />
+          <CardContent className="w-full p-0">
+            <AddToCartButton game={game} />
+            <div className="flex justify-center items-center py-4 gap-2">
+              <Heart />
+              <p className="text-semibold">Wishlist it</p>
+            </div>
+          </CardContent>
+        </Card>        
       </div>
 
-      <Separator className="max-w-7xl mx-auto my-10" />
+      <Separator className="max-w-7xl mx-auto my-4 md:my-10" />
 
-      <div className="flex max-w-7xl mx-auto ">
-        <div className="w-1/2 space-y-4">
+      <div className="flex max-md:flex-col max-w-7xl mx-auto ">
+        <div className="w-full md:w-1/2 space-y-4">
           {game?.images.length > 0 && (
             <Image
               src={game?.images[0].url}
@@ -131,7 +130,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
           </p>
         </div>
         <Separator orientation="vertical" decorative className="h-full mx-4" />
-        <div className="w-1/2 space-y-4">
+        <div className="w-full md:w-1/2 space-y-4">
           <h1 className="text-2xl border-b">Game Details</h1>
           <div className="grid grid-cols-2 gap-4">            
               <p>Genre:</p>  

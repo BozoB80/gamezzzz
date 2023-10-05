@@ -16,7 +16,7 @@ interface SortingFiltersProps {
 }
 
 const SortingFilters = ({ data }: SortingFiltersProps) => {
-  const { sortDataByDate, sortDataByPrice, setGames } = useSortingStore();
+  const { sortDataByDate, sortDataByPrice, setGames, resetSorting } = useSortingStore();
   const [sortOption, setSortOption] = useState<string>("All");
 
   useEffect(() => {
@@ -34,16 +34,20 @@ const SortingFilters = ({ data }: SortingFiltersProps) => {
       sortDataByDate("desc");
     } else if (selectedOption === "Oldest") {
       sortDataByDate("asc");
+    } else if (selectedOption === "All") {
+      resetSorting()
     }
-    // You may add a case for "default" to reset sorting to the initial state if needed.
   };
+
 
   return (
     <div className="flex justify-center items-center">
-      <h1 className="whitespace-nowrap">Sort by:</h1>
       <Select defaultValue={sortOption} onValueChange={handleSortChange}>
-        <SelectTrigger className="w-full md:w-[160px] text-base text-white bg-transparent border-x-0 border-t-0 rounded-none focus:ring-offset-0">
-          <SelectValue>{sortOption}</SelectValue>
+      <h1 className="whitespace-nowrap">Sort by:</h1>
+        <SelectTrigger className="w-[120px] lg:w-[160px] text-sm lg:text-base text-white bg-transparent border-x-0 border-t-0 rounded-none focus:ring-offset-0">
+          <SelectValue>
+            {sortOption}          
+          </SelectValue>
         </SelectTrigger>
         <SelectContent className="bg-gray-200">
           <SelectItem value="All">All</SelectItem>

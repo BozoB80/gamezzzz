@@ -51,12 +51,12 @@ const CategoryIdPage = async ({ params, searchParams }: CategoryNameProps) => {
 
   return (
     <div className="bg-catid-bg bg-cover bg-no-repeat bg-center min-h-screen">
-      <div className="relative max-w-7xl mx-auto p-1 sm:p-4 xl:px-0 xl:py-4 text-white space-y-6">
-        <h1 className="text-6xl font-medium text-start pt-4">
+      <div className="relative max-w-7xl mx-auto p-1 sm:p-4 xl:px-0 xl:py-4 text-white space-y-3 md:space-y-6">
+        <h1 className="text-4xl md:text-6xl font-medium text-center md:text-start pt-4">
           {category.name} Games
         </h1>
 
-        <p className="text-xl max-w-2xl">
+        <p className="text-lg md:text-xl max-w-2xl">
           Gamezzzz store offers some of the best {category.name} Games. Download
           today and start playing fun and exciting PC {category.name} games.
         </p>
@@ -66,7 +66,7 @@ const CategoryIdPage = async ({ params, searchParams }: CategoryNameProps) => {
         <FilterBar games={games} />
 
         <div className="flex gap-x-4">
-          <div className="flex flex-col">
+          <div className="hidden md:flex flex-col">
             <PriceFilters
               valueKey="price"
             />
