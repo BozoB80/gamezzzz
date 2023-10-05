@@ -70,7 +70,6 @@ model Order {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   userId    String
   isPaid    Boolean
-  phone     String   @default("")
   address   String   @default("")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -37,8 +37,7 @@ export async function POST(req: Request) {
       },
       data: {
         isPaid: true,
-        address: session?.customer_details?.address?.city || "",
-        phone: session?.customer_details?.phone || ""
+        address: session?.customer_details?.address?.country || "",
       },
       include: {
         orderItems: true
