@@ -91,8 +91,8 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
           <CardContent>
             <Separator className="my-2" />
             <AddToCartButton game={game} onClick={(e) => {
-      e.stopPropagation(); // Prevent propagation to parent Card
-    }} />
+              e.stopPropagation()
+            }} />
             <div className="flex justify-center items-center py-4 gap-2">
               <Heart />
               <p className="text-semibold">Add to wishlist</p>

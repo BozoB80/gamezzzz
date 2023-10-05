@@ -20,8 +20,8 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 2,
-    slidesToSlide: 2 // optional, default to 1.
+    items: 2  ,
+    slidesToSlide: 1 // optional, default to 1.
   }
 };
 
@@ -56,10 +56,8 @@ const DealsGames = ({ games }: DealsGamesProps) => {
         pauseOnHover
         renderArrowsWhenDisabled={false}
         renderButtonGroupOutside={false}
-        renderDotsOutside={false}
-       
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        
+        renderDotsOutside={false}       
+        removeArrowOnDeviceType={["tablet", "mobile"]}        
       >
         {games.map((game) => (
           <div key={game.id} className="mx-2 pb-10">

@@ -1,11 +1,7 @@
 import GamesList from "@/components/GamesList";
 import PriceFilters from "@/components/filters/PriceFilters";
-import { SearchInput } from "@/components/filters/SearchInput";
-
-import FilterNumber from "@/components/filters/FilterNumber";
 import prismadb from "@/lib/prismadb";
 import CategoryFilters from "@/components/filters/CategoryFilters";
-import SortingFilters from "@/components/filters/SortingFilters";
 import FilterBar from "@/components/FilterBar";
 
 interface GamesPageProps {
@@ -45,10 +41,10 @@ const GamesPage = async ({ searchParams }: GamesPageProps) => {
   return (
     <div className="bg-games-bg bg-cover bg-no-repeat bg-center min-h-screen p-0">
       <div className="relative max-w-7xl mx-auto p-1 sm:p-4 xl:px-0 xl:py-4 text-white space-y-4 h-full">
-        <h1 className="text-5xl lg:text-7xl font-bold text-center my-3">
+        <h1 className="text-2xl sm:text-5xl lg:text-7xl font-bold text-center my-3">
           Best games in our collection
         </h1>
-        <FilterBar games={games} />
+        <FilterBar games={games} categories={categories} />
         <div className="flex flex-col lg:flex-row gap-x-4">
           <div className="hidden lg:flex flex-col">
             <CategoryFilters

@@ -47,7 +47,7 @@ const CategoryFilters: React.FC<FilterProps> = ({ data, name, valueKey }) => {
   };
 
   return (
-    <Accordion type="single" collapsible className="w-40">
+    <Accordion type="single" collapsible className="w-full lg:w-40">
       <AccordionItem value={name}>
         <AccordionTrigger className="p-3 text-lg font-semibold">
           {name}

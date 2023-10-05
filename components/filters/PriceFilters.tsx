@@ -56,7 +56,7 @@ const PriceFilters: React.FC<FilterProps> = ({
   };
 
   return (
-    <Accordion type="single" collapsible className="w-40">
+    <Accordion type="single" collapsible className="w-full lg:w-40">
       <AccordionItem value="price">
         <AccordionTrigger className="p-3 text-lg font-semibold">
           Price

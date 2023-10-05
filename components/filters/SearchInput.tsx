@@ -37,14 +37,14 @@ export const SearchInput = () => {
   }
 
   return (
-    <div className="relative">
+    <div className="max-lg:w-full relative">
       <Search
         className="h-4 w-4 absolute top-3 left-1"
       />
       <Input
         onChange={onChange}
         value={value}
-        className="w-full md:w-[160px] pl-9 bg-transparent border-x-0 border-t-0 rounded-none focus-visible:ring-offset-0"
+        className="w-full lg:w-[160px] pl-9 bg-transparent border-x-0 border-t-0 rounded-none focus-visible:ring-offset-0 focus-visible:ring-0"
         placeholder="Search title"
       />
       {value && (

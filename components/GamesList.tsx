@@ -17,7 +17,7 @@ const GamesList: React.FC<GamesListProps> = ({ games }) => {
   return (
     <div className="w-full">      
       {items.length === 0 && <NoResluts />}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
         {items.map((game) => (
           <div key={game.id}>
             <GameCard game={game} />

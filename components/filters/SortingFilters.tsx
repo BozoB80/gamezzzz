@@ -40,7 +40,7 @@ const SortingFilters = ({ data }: SortingFiltersProps) => {
 
   return (
     <div className="flex justify-center items-center">
-      <h1>Sort by:</h1>
+      <h1 className="whitespace-nowrap">Sort by:</h1>
       <Select defaultValue={sortOption} onValueChange={handleSortChange}>
         <SelectTrigger className="w-full md:w-[160px] text-base text-white bg-transparent border-x-0 border-t-0 rounded-none focus:ring-offset-0">
           <SelectValue>{sortOption}</SelectValue>
