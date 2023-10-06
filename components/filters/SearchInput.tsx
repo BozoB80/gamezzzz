@@ -2,22 +2,28 @@
 
 import qs from "query-string";
 import { Search, X } from "lucide-react";
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ChangeEventHandler, useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
 
-export const SearchInput = () => {
-  const [value, setValue] = useState("")
+interface SearchInputParams {
+  value: string
+  setValue: (value: string) => void
+}
+
+export const SearchInput = ({ value, setValue }: SearchInputParams) => {
+  
   const debouncedValue = useDebounce(value);
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const currentCategoryId = searchParams.get("categoryId");
+  const currentCategoryId = searchParams.get("categoryId")
   const price = searchParams.get("price")
+  const sort = searchParams.get("sort")
 
   useEffect(() => {
     const url = qs.stringifyUrl({
@@ -25,12 +31,13 @@ export const SearchInput = () => {
       query: {
         categoryId: currentCategoryId,
         title: debouncedValue,
-        price: price
+        price: price,
+        sort: sort
       }
     }, { skipEmptyString: true, skipNull: true });
 
     router.push(url);
-  }, [debouncedValue, currentCategoryId, router, pathname, price])
+  }, [debouncedValue, currentCategoryId, router, pathname, price, sort])
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValue(e.target.value)    

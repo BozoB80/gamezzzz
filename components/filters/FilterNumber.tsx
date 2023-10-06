@@ -3,7 +3,11 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../ui/button";
 
-const FilterNumber = () => {
+interface FilterNumberProps {
+  setValue: (value: string) => void
+}
+
+const FilterNumber = ({ setValue }: FilterNumberProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = Object.fromEntries(useSearchParams());
@@ -11,6 +15,7 @@ const FilterNumber = () => {
 
   const resetSearchParams = () => {
     router.replace(pathname)
+    setValue("")
     router.refresh()
   };
 

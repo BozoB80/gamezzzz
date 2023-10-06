@@ -3,12 +3,14 @@ import PriceFilters from "@/components/filters/PriceFilters";
 import prismadb from "@/lib/prismadb";
 import CategoryFilters from "@/components/filters/CategoryFilters";
 import FilterBar from "@/components/FilterBar";
+import { Game } from "@prisma/client";
 
 interface GamesPageProps {
   searchParams: {
     categoryId: string;
     price: string;
     title: string
+    sort: string
   };
 }
 
@@ -24,16 +26,29 @@ const GamesPage = async ({ searchParams }: GamesPageProps) => {
     },
   });
 
-  if (searchParams.price === 'free') {
-    games = games.filter((game) => game.discount ? (game.price - (game.price * game.discount / 100)) === 0 : game.price === 0);
-  } else if (searchParams.price === 'under10') {
-    games = games.filter((game) => game.discount ? (game.price - (game.price * game.discount / 100)) <= 10 : game.price <= 10);
-  } else if (searchParams.price === 'under20') {
-    games = games.filter((game) => game.discount ? (game.price - (game.price * game.discount / 100)) <= 20 : game.price <= 20);
-  } else if (searchParams.price === 'under30') {
-    games = games.filter((game) => game.discount ? (game.price - (game.price * game.discount / 100)) <= 30 : game.price <= 30);
-  } else if (searchParams.price === 'over14.99') {
-    games = games.filter((game) => game.discount ? (game.price - (game.price * game.discount / 100)) >= 14.99 : game.price >= 14.99);
+  // Price filters
+  const priceFilters: Record<string, (game: Game) => boolean> = {
+    'free': (game) => (game.discount ? (game.price - (game.price * game.discount / 100)) === 0 : game.price === 0),
+    'under10': (game) => (game.discount ? (game.price - (game.price * game.discount / 100)) <= 10 : game.price <= 10),
+    'under20': (game) => (game.discount ? (game.price - (game.price * game.discount / 100)) <= 20 : game.price <= 20),
+    'under30': (game) => (game.discount ? (game.price - (game.price * game.discount / 100)) <= 30 : game.price <= 30),
+    'over14.99': (game) => (game.discount ? (game.price - (game.price * game.discount / 100)) >= 14.99 : game.price >= 14.99),
+  };
+
+  if (priceFilters.hasOwnProperty(searchParams.price)) {
+    games = games.filter(priceFilters[searchParams.price]);
+  }
+
+  // Sorting filters
+  const sortOptions: { [key: string]: (a: Game, b: Game) => number } = {
+    'high-low': (a, b) => (b.discount ? b.price - (b.price * b.discount / 100) : b.price) - (a.discount ? a.price - (a.price * a.discount / 100) : a.price),
+    'low-high': (a, b) => (a.discount ? a.price - (a.price * a.discount / 100) : a.price) - (b.discount ? b.price - (b.price * b.discount / 100) : b.price),
+    'newest': (a, b) => b.releaseDate - a.releaseDate,
+    'oldest': (a, b) => a.releaseDate - b.releaseDate,
+  };
+  
+  if (sortOptions.hasOwnProperty(searchParams.sort)) {
+    games.sort(sortOptions[searchParams.sort]);
   }
 
   const categories = await prismadb.category.findMany();

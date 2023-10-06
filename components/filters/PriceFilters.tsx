@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
-import { Game } from "@prisma/client";
 import {
   Accordion,
   AccordionContent,

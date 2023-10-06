@@ -1,6 +1,8 @@
 'use client'
 
-import useSortingStore from "@/hooks/use-sorting-store";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import queryString from "query-string";
 import {
   Select,
   SelectContent,
@@ -8,37 +10,54 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useEffect, useState } from "react";
-import { Game } from "@prisma/client";
 
-interface SortingFiltersProps {
-  data: Game[]
-}
-
-const SortingFilters = ({ data }: SortingFiltersProps) => {
-  const { sortDataByDate, sortDataByPrice, setGames, resetSorting } = useSortingStore();
+const SortingFilters = () => {
   const [sortOption, setSortOption] = useState<string>("All");
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname();
 
   useEffect(() => {
-    setGames(data);
-  }, [data, setGames]);
+    const initializeSortOption = () => {
+      const currentSortOption = searchParams.get("sort");
+      if (currentSortOption) {
+        setSortOption(sortOption);
+      } else {
+        setSortOption("All")
+      }
+    }
+
+    initializeSortOption()
+  }, [searchParams, sortOption]);
 
   const handleSortChange = (selectedOption: string) => {
     setSortOption(selectedOption);
+    const current = queryString.parse(searchParams.toString())
+    
+    let query = { ...current }
 
     if (selectedOption === "Price: High to Low") {
-      sortDataByPrice("desc");
+      query["sort"] = 'high-low'      
     } else if (selectedOption === "Price: Low to High") {
-      sortDataByPrice("asc");
+      query["sort"] = 'low-high'
     } else if (selectedOption === "New Release") {
-      sortDataByDate("desc");
+      query["sort"] = 'newest'
     } else if (selectedOption === "Oldest") {
-      sortDataByDate("asc");
+      query["sort"] = 'oldest'
     } else if (selectedOption === "All") {
-      resetSorting()
+      query["sort"] = 'all'
     }
-  };
 
+    const url = queryString.stringifyUrl(
+      {
+        url: pathname,
+        query
+      },
+      {skipNull: true}
+    )
+    
+    router.push(url)
+  };
 
   return (
     <div className="flex justify-center items-center">

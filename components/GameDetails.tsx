@@ -130,7 +130,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
           </p>
         </div>
         <Separator orientation="vertical" decorative className="h-full mx-4" />
-        <div className="w-full md:w-1/2 space-y-4">
+        <div className="w-full md:w-1/2 max-md:mt-4 space-y-4">
           <h1 className="text-2xl border-b">Game Details</h1>
           <div className="grid grid-cols-2 gap-4">            
               <p>Genre:</p>  

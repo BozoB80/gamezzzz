@@ -9,6 +9,7 @@ import { ListFilter } from "lucide-react";
 import CategoryFilters from "./filters/CategoryFilters";
 import PriceFilters from "./filters/PriceFilters";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
 interface FilterBarProps {
   games: Game[]
@@ -16,12 +17,14 @@ interface FilterBarProps {
 }
 
 const FilterBar = ({ games, categories }: FilterBarProps) => {
+  const [value, setValue] = useState("")
+
   return (
     <>
       <div className="hidden lg:flex justify-between items-center">
-        <SearchInput />
+        <SearchInput value={value} setValue={setValue} />
         <p className="py-2 border-b">Results: {games.length}</p>
-        <FilterNumber />
+        <FilterNumber setValue={setValue} />
         <SortingFilters data={games} />
       </div>
 
@@ -33,10 +36,10 @@ const FilterBar = ({ games, categories }: FilterBarProps) => {
           </SheetTrigger>
           <SheetContent className="w-full flex flex-col justify-between items-center h-full">
             <div className="w-full flex flex-col">
-              <SheetTitle><FilterNumber /></SheetTitle>
+              <SheetTitle><FilterNumber setValue={setValue} /></SheetTitle>
               <div className="flex flex-col justify-between items-center mt-4">
                 <div className="flex flex-col justify-between items-center w-full">
-                  <SearchInput />
+                  <SearchInput value={value} setValue={setValue} />
                   {categories && categories.length > 0 && (
                     <CategoryFilters name="Genres" data={categories} valueKey="categoryId" />
                   )}
