@@ -88,7 +88,7 @@ const AdminPage = async () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                € {totalRevenue}
+                € {totalRevenue.toFixed(2)}
               </div>
             </CardContent>
           </Card>
