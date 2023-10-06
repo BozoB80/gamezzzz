@@ -25,7 +25,7 @@ const FilterBar = ({ games, categories }: FilterBarProps) => {
         <SearchInput value={value} setValue={setValue} />
         <p className="py-2 border-b">Results: {games.length}</p>
         <FilterNumber setValue={setValue} />
-        <SortingFilters data={games} />
+        <SortingFilters />
       </div>
 
       <div className="flex lg:hidden justify-between items-center">
@@ -53,7 +53,7 @@ const FilterBar = ({ games, categories }: FilterBarProps) => {
               </div>
           </SheetContent>
         </Sheet>
-        <SortingFilters data={games} />
+        <SortingFilters />
       </div>
     </>
   );
