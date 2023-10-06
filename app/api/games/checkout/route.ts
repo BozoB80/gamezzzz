@@ -94,6 +94,7 @@ export async function POST(
     const order = await prismadb.order.create({
       data: {
         userId: user.id,
+        userName: user.username || "",
         isPaid: false,
         orderItems: {
           create: gamesIds.map((gameId: string) => ({

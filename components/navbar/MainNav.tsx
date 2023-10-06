@@ -8,6 +8,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Billboard, Category, Game } from "@prisma/client";
@@ -30,7 +31,7 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
   const router = useRouter();
 
   return (
-    <NavigationMenu className="max-lg:hidden z-50">
+    <NavigationMenu className="relative max-lg:hidden z-50 ">
       <NavigationMenuList>
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>
@@ -162,11 +163,19 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger>ABOUT</NavigationMenuTrigger>
+          <Link href="/about" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              ABOUT
+            </NavigationMenuLink>
+          </Link>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger>ORDERS</NavigationMenuTrigger>
+          <Link href="/orders" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              ORDERS
+            </NavigationMenuLink>
+          </Link>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

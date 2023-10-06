@@ -15,11 +15,11 @@ const NavRight = () => {
 
   return (
     <div className="ml-auto flex items-center space-x-4">
-      {user?.username === "admin_b" && (
+      {user && (
         <Button
           variant="ghost"
           onClick={() => router.push("/admin")}
-          className="border-black text-black text-md font-medium uppercase"
+          className="border-black text-black text-md font-medium uppercase animate-bounce"
         >
           <ShieldCheck className="h-6 w-6 mr-2" />
           Admin
