@@ -11,24 +11,31 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-const SortingFilters = () => {
-  const [sortOption, setSortOption] = useState<string>("All");
+interface SortingFiltersProps {
+  sortOption: string
+  setSortOption: (sortOption: string) => void
+}
+
+const SortingFilters = ({ sortOption, setSortOption }: SortingFiltersProps) => {
+  
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname();
 
-  useEffect(() => {
-    const initializeSortOption = () => {
-      const currentSortOption = searchParams.get("sort");
-      if (currentSortOption) {
-        setSortOption(sortOption);
-      } else {
-        setSortOption("All")
-      }
+  const updateSortOptionFromQuery = () => {
+    const currentSortOption = searchParams.get("sort");
+    if (currentSortOption) {
+      setSortOption(sortOption);
+    } else {
+      setSortOption("All");
     }
+  };
 
-    initializeSortOption()
-  }, [searchParams, sortOption]);
+  useEffect(() => {
+    updateSortOptionFromQuery();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
+  
 
   const handleSortChange = (selectedOption: string) => {
     setSortOption(selectedOption);

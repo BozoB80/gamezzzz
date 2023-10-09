@@ -18,14 +18,15 @@ interface FilterBarProps {
 
 const FilterBar = ({ games, categories }: FilterBarProps) => {
   const [value, setValue] = useState("")
+  const [sortOption, setSortOption] = useState<string>("All");
 
   return (
     <>
       <div className="hidden lg:flex justify-between items-center">
         <SearchInput value={value} setValue={setValue} />
         <p className="py-2 border-b">Results: {games.length}</p>
-        <FilterNumber setValue={setValue} />
-        <SortingFilters />
+        <FilterNumber setValue={setValue} setSortOption={setSortOption} />
+        <SortingFilters sortOption={sortOption} setSortOption={setSortOption} />
       </div>
 
       <div className="flex lg:hidden justify-between items-center">
@@ -36,7 +37,7 @@ const FilterBar = ({ games, categories }: FilterBarProps) => {
           </SheetTrigger>
           <SheetContent className="w-full flex flex-col justify-between items-center h-full">
             <div className="w-full flex flex-col">
-              <SheetTitle><FilterNumber setValue={setValue} /></SheetTitle>
+              <SheetTitle><FilterNumber setValue={setValue} setSortOption={setSortOption} /></SheetTitle>
               <div className="flex flex-col justify-between items-center mt-4">
                 <div className="flex flex-col justify-between items-center w-full">
                   <SearchInput value={value} setValue={setValue} />
@@ -53,7 +54,7 @@ const FilterBar = ({ games, categories }: FilterBarProps) => {
               </div>
           </SheetContent>
         </Sheet>
-        <SortingFilters />
+        <SortingFilters sortOption={sortOption} setSortOption={setSortOption} />
       </div>
     </>
   );

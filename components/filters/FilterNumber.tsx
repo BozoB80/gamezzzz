@@ -5,9 +5,10 @@ import { Button } from "../ui/button";
 
 interface FilterNumberProps {
   setValue: (value: string) => void
+  setSortOption: (sortOption: string) => void
 }
 
-const FilterNumber = ({ setValue }: FilterNumberProps) => {
+const FilterNumber = ({ setValue, setSortOption }: FilterNumberProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = Object.fromEntries(useSearchParams());
@@ -16,6 +17,7 @@ const FilterNumber = ({ setValue }: FilterNumberProps) => {
   const resetSearchParams = () => {
     router.replace(pathname)
     setValue("")
+    setSortOption("All")
     router.refresh()
   };
 
