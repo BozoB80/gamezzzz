@@ -73,7 +73,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
 
       
         <Card className="w-full md:w-96 md:-mt-20 px-4 py-2 rounded-sm bg-gray-100">
-          <CardTitle className="flex justify-start items-end pt-2">
+          <CardTitle className="flex justify-start items-end pt-2 text-black">
             {!game.discount ? (
               <p className="text-3xl">€ {game.price.toFixed(2)}</p>
             ) : (
@@ -91,7 +91,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
           <Separator className="my-4" />
           <CardContent className="w-full p-0">
             <AddToCartButton game={game} />
-            {/* <WishlistButton /> */}
+            <WishlistButton game={game} />
           </CardContent>
         </Card>        
       </div>
