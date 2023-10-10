@@ -3,7 +3,7 @@
 import { Category, Game, Image as Images } from "@prisma/client";
 import Container from "./Container";
 import Image from "next/image";
-import { Heart, Star, PlusCircleIcon } from "lucide-react";
+import { Star, PlusCircleIcon } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { Card, CardContent, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
@@ -11,6 +11,7 @@ import { Badge } from "./ui/badge";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import AddToCartButton from "./AddToCartButton";
+import WishlistButton from "./WishlistButton";
 
 interface GameDetailsProps {
   game: Game & {
@@ -83,17 +84,14 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
                 <h1 className="text-3xl font-normal line-through text-muted-foreground">
                   € {game.price.toFixed(2)}
                 </h1>
-                <h1 className="text-3xl">€ {discountedPrice?.toFixed(2)}</h1>
+                <h1 className="text-3xl text-black">€ {discountedPrice?.toFixed(2)}</h1>
               </div>
             )}
           </CardTitle>
           <Separator className="my-4" />
           <CardContent className="w-full p-0">
             <AddToCartButton game={game} />
-            <div className="flex justify-center items-center py-4 gap-2">
-              <Heart />
-              <p className="text-semibold">Wishlist it</p>
-            </div>
+            {/* <WishlistButton /> */}
           </CardContent>
         </Card>        
       </div>

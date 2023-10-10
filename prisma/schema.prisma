@@ -52,6 +52,7 @@ model Game {
   orderItems  OrderItem[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+  wishlist    Wishlist[]
 
   @@index([categoryId])
   @@fulltext([title])
@@ -85,7 +86,7 @@ model OrderItem {
   order   Order  @relation(fields: [orderId], references: [id])
   gameId  String @db.ObjectId
   game    Game   @relation(fields: [gameId], references: [id])
-  
+
   @@index([orderId])
   @@index([gameId])
 }
@@ -97,4 +98,12 @@ model StripeCustomer {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Wishlist {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @unique
+  isWishlisted  Boolean
+  gameId String @db.ObjectId
+  game   Game   @relation(fields: [gameId], references: [id])
 }

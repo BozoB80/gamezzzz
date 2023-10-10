@@ -9,24 +9,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Game, Image as Images } from "@prisma/client";
+import { Game, Image as Images, Wishlist } from "@prisma/client";
 import Image from "next/image";
 import { Separator } from "./ui/separator";
 import { useState } from "react";
-import { Heart } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Badge } from "./ui/badge";
 import AddToCartButton from "./AddToCartButton";
+import WishlistButton from "./WishlistButton";
 
 interface GameCardProps {
   game: Game & {
     images?: Images[];
   };
   isDeals?: boolean
+  wishlisted: Wishlist[]
 }
 
-const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
+const GameCard: React.FC<GameCardProps> = ({ game, isDeals, wishlisted }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const discountedPrice = game.discount ? game.price - (game.price * game.discount / 100) : game.price;
 
@@ -38,7 +39,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
     <Link href={`/games/${game.id}`}>
       <Card
         className={`h-full group cursor-pointer shadow-xl border-none ${
-          isFlipped ? "card flipped" : ""
+          isFlipped ? "lg:card lg:flipped" : ""
         }`}
         onMouseEnter={handleCardFlip}
         onMouseLeave={handleCardFlip}
@@ -93,10 +94,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
             <AddToCartButton game={game} onClick={(e) => {
               e.stopPropagation()
             }} />
-            <div className="flex justify-center items-center py-4 gap-2">
-              <Heart />
-              <p className="text-semibold">Add to wishlist</p>
-            </div>
+            <WishlistButton game={game} wishlisted={wishlisted} />
           </CardContent>
         </div>
       </Card>

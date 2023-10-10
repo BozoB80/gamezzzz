@@ -54,6 +54,12 @@ const GamesPage = async ({ searchParams }: GamesPageProps) => {
 
   const categories = await prismadb.category.findMany();
 
+  const wishlisted = await prismadb.wishlist.findMany({
+    where: {
+      isWishlisted: true
+    }
+  }) || []
+
   return (
     <div className="bg-games-bg bg-cover bg-no-repeat bg-center min-h-screen p-0">
       <div className="relative max-w-7xl mx-auto p-1 sm:p-4 xl:px-0 xl:py-4 text-white space-y-4 h-full">
@@ -72,7 +78,7 @@ const GamesPage = async ({ searchParams }: GamesPageProps) => {
               valueKey="price"
             />
           </div>
-          <GamesList games={games} />
+          <GamesList games={games} wishlisted={wishlisted} />
         </div>
       </div>
     </div>

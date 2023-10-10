@@ -1,15 +1,16 @@
 'use client'
 
-import { Game } from "@prisma/client";
+import { Game, Wishlist } from "@prisma/client";
 import NoResluts from "./ui/no-results";
 import GameCard from "./GameCard";
 import useSortingStore from "@/hooks/use-sorting-store";
 
 interface GamesListProps {
   games: Game[]
+  wishlisted: Wishlist[]
 }
 
-const GamesList: React.FC<GamesListProps> = ({ games }) => {
+const GamesList: React.FC<GamesListProps> = ({ games, wishlisted }) => {
   const { sortedGames } = useSortingStore()
 
   const items = sortedGames.length > 0 ? sortedGames : games
@@ -20,7 +21,7 @@ const GamesList: React.FC<GamesListProps> = ({ games }) => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
         {items.map((game) => (
           <div key={game.id}>
-            <GameCard game={game} />
+            <GameCard game={game} wishlisted={wishlisted} />
           </div>
         ))}
       </div>

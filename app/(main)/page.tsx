@@ -1,5 +1,6 @@
 import Carousel from "@/components/Carousel"
 import DealsGames from "@/components/DealsGames"
+import DealsWeek from "@/components/DealsWeek"
 import prismadb from "@/lib/prismadb"
 
 export default async function Home() {
@@ -27,6 +28,7 @@ export default async function Home() {
           games={games}
         />
         <DealsGames games={dealsGames} />
+        <DealsWeek games={dealsGames} />
       </div>
     </main>
   )

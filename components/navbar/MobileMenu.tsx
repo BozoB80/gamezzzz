@@ -1,6 +1,6 @@
 'use client'
 
-import { Menu } from "lucide-react";
+import { Menu, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { mobileNavLinks } from "@/constants";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
@@ -50,6 +50,16 @@ const MobileMenu = () => {
             </SheetClose>
           ))}
         </div>
+        {user && (
+          <Button
+            variant="ghost"
+            onClick={() => router.push("/admin")}
+            className="lg:hidden border-black text-black text-md font-medium uppercase animate-bounce mt-8"
+          >
+            <ShieldCheck fill="red" className="h-6 w-6 mr-2" />
+            Admin
+          </Button>
+        )}
       </SheetContent>
     </Sheet>
   );
