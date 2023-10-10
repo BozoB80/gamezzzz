@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 import { Anek_Gujarati } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import Navbar from '@/components/navbar/Navbar'
-import { NextUiProvider } from '@/components/providers/NextUiProvider'
+import { Providers } from '@/components/providers/NextUiProvider'
 import { Toaster } from '@/components/ui/toaster'
 
 const font = Anek_Gujarati({ subsets: ['latin'] })
@@ -22,13 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className='dark'>
         <body className={font.className}>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-            <NextUiProvider>
+            <Providers>
             <Navbar />
             {children}
-            </NextUiProvider>
+            </Providers>
             <Toaster />
           </ThemeProvider>
         </body>

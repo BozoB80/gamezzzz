@@ -4,12 +4,14 @@ import { Category, Game } from "@prisma/client";
 import FilterNumber from "./filters/FilterNumber";
 import { SearchInput } from "./filters/SearchInput";
 import SortingFilters from "./filters/SortingFilters";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { ListFilter } from "lucide-react";
 import CategoryFilters from "./filters/CategoryFilters";
 import PriceFilters from "./filters/PriceFilters";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ScrollArea } from "./ui/scroll-area";
 
 interface FilterBarProps {
   games: Game[]
@@ -19,6 +21,18 @@ interface FilterBarProps {
 const FilterBar = ({ games, categories }: FilterBarProps) => {
   const [value, setValue] = useState("")
   const [sortOption, setSortOption] = useState<string>("All");
+
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = Object.fromEntries(useSearchParams());
+  const paramsCount = Object.keys(searchParams).length;
+
+  const resetSearchParams = () => {
+    router.replace(pathname)
+    setValue("")
+    setSortOption("All")
+    router.refresh()
+  };
 
   return (
     <>
@@ -36,7 +50,7 @@ const FilterBar = ({ games, categories }: FilterBarProps) => {
             <ListFilter />
           </SheetTrigger>
           <SheetContent className="w-full flex flex-col justify-between items-center h-full">
-            <div className="w-full flex flex-col">
+            <ScrollArea className="w-full flex flex-col">
               <SheetTitle><FilterNumber setValue={setValue} setSortOption={setSortOption} /></SheetTitle>
               <div className="flex flex-col justify-between items-center mt-4">
                 <div className="flex flex-col justify-between items-center w-full">
@@ -47,10 +61,13 @@ const FilterBar = ({ games, categories }: FilterBarProps) => {
                   <PriceFilters valueKey="price" />
                 </div>
               </div>
-            </div>
-              <div className="w-full h-auto bg-muted-foreground/20 flex justify-between rounded-xs p-2">
-                <Button size="lg" variant="outline">Clear</Button>                
-                <Button size="lg">Confirm</Button>                
+            </ScrollArea>
+              <div className="w-full h-auto bg-muted-foreground/10 flex justify-between rounded-xs p-2">
+                <Button size="lg" variant="outline" disabled={paramsCount === 0} onClick={resetSearchParams}>Clear</Button>  
+                <SheetClose>
+                <Button size="lg" disabled={paramsCount === 0}>Confirm</Button>                
+                
+                </SheetClose>              
               </div>
           </SheetContent>
         </Sheet>

@@ -75,7 +75,7 @@ const SortingFilters = ({ sortOption, setSortOption }: SortingFiltersProps) => {
             {sortOption}          
           </SelectValue>
         </SelectTrigger>
-        <SelectContent className="bg-gray-200">
+        <SelectContent className="bg-primary dark:text-black">
           <SelectItem value="All">All</SelectItem>
           <SelectItem value="Price: High to Low">Price: High to Low</SelectItem>
           <SelectItem value="Price: Low to High">Price: Low to High</SelectItem>
