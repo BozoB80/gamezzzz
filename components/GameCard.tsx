@@ -24,7 +24,7 @@ interface GameCardProps {
     images?: Images[];
   };
   isDeals?: boolean
-  wishlisted: Wishlist[]
+  wishlisted?: Wishlist[]
 }
 
 const GameCard: React.FC<GameCardProps> = ({ game, isDeals, wishlisted }) => {

@@ -16,7 +16,7 @@ const formSchema = z.object({
 
 interface WishlistButtonProps {
   game: Game
-  wishlisted: Wishlist[]
+  wishlisted?: Wishlist[]
 }
 
 const WishlistButton = ({ game, wishlisted }: WishlistButtonProps) => {
@@ -29,11 +29,11 @@ const WishlistButton = ({ game, wishlisted }: WishlistButtonProps) => {
     },
   })
 
-  const wishId = wishlisted.map((wish) => wish.id)
+  const wishId = wishlisted?.map((wish) => wish.id)
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      if (wishlisted.map((list) => list.gameId === game.id)) {
+      if (wishlisted?.map((list) => list.gameId === game.id)) {
         await axios.delete(`/api/wishlist/${wishId}`)
       }
     } catch (error) {
