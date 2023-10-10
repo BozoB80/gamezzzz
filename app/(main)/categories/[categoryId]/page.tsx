@@ -31,6 +31,12 @@ const CategoryIdPage = async ({ params, searchParams }: CategoryNameProps) => {
     return null;
   }
 
+  const wishlisted = await prismadb.wishlist.findMany({
+    where: {
+      isWishlisted: true
+    }
+  })
+
   let games = await prismadb.game.findMany({
     where: {
       categoryId: params.categoryId,
@@ -91,7 +97,7 @@ const CategoryIdPage = async ({ params, searchParams }: CategoryNameProps) => {
               valueKey="price"
             />
           </div>
-          <GamesList games={games} />
+          <GamesList games={games} wishlisted={wishlisted} />
         </div>
       </div>
     </div>

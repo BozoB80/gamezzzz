@@ -58,7 +58,7 @@ const GamesPage = async ({ searchParams }: GamesPageProps) => {
     where: {
       isWishlisted: true
     }
-  }) || []
+  })
 
   return (
     <div className="bg-games-bg bg-cover bg-no-repeat bg-center min-h-screen p-0">
