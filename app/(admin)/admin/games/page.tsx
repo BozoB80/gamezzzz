@@ -27,7 +27,7 @@ const GamesPage = async () => {
 
   return (
     <div className="flex-1 flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="flex-1 space-y-4 p-2 md:p-8 pt-6">
         <GamesClient data={formattedGames} />
       </div>
     </div>

@@ -5,6 +5,7 @@ import Sidebar from "@/components/admin/Sidebar";
 import "../globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
+import AdminNavbar from "@/components/admin/AdminNavbar";
 
 const font = Anek_Gujarati({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function AuthLayout({
       <html lang="en">
         <body className={font.className}>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            <AdminNavbar />
             <main className="flex flex-row">
               <Sidebar />
               {children}

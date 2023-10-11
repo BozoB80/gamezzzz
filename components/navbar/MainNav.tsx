@@ -8,7 +8,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Billboard, Category, Game } from "@prisma/client";
@@ -21,6 +20,7 @@ import {
   CardFooter,
   Image as ImageNext,
 } from "@nextui-org/react";
+import { useTheme } from "next-themes";
 
 interface MainNavProps {
   games: Game[];
@@ -29,6 +29,7 @@ interface MainNavProps {
 
 export const MainNav = ({ games, categories }: MainNavProps) => {
   const router = useRouter();
+  const { theme } = useTheme() 
 
   return (
     <NavigationMenu className="relative max-lg:hidden z-50 ">
@@ -88,7 +89,7 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
                       <Separator />
                       <div className="flex justify-between items-center w-full px-2">
                         <Image
-                          src="/windows-icon.png"
+                          src={theme !== "dark" ? "/windows-icon.png" : "/windows-white.png"}
                           alt="windows icon"
                           width={50}
                           height={50}
@@ -111,7 +112,7 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
                       </div>
                     </CardContent>
                   </Card>
-                );
+                ); 
               })}
             </div>
           </NavigationMenuContent>
@@ -128,7 +129,7 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
                 className="font-semibold"
               >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Browse all categories
+                  <p className="text-black dark:text-white/80">Browse all categories</p>
                 </NavigationMenuLink>
               </Link>
               <Separator />

@@ -75,7 +75,7 @@ const AdminPage = async () => {
 
   return (
     <div className="flex-1 flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
         <Heading title="Dashboard" description="Overview of your store" />
         <Separator />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
