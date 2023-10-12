@@ -31,7 +31,7 @@ import { Textarea } from "@/components/ui/textarea";
 import AlertModal from "@/components/modals/AlertModal";
 import { useState } from "react";
 import Heading from "@/components/ui/heading";
-import { Trash } from "lucide-react";
+import { Loader2, Trash } from "lucide-react";
 
 const formSchema = z.object({
   title: z.string().min(2).max(40),
@@ -112,6 +112,7 @@ const GameForm: React.FC<GamesFormProps> = ({ initialData, categories }) => {
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
       try {
+        setLoading(true)
         if (initialData) {
           await axios.patch(`/api/games/${params.gameId}`, data);
         } else {
@@ -121,18 +122,25 @@ const GameForm: React.FC<GamesFormProps> = ({ initialData, categories }) => {
         router.push("/admin/games");
         toast({ description: toastMessage })
       } catch (error) {
+        setLoading(false)
         toast({ variant: "destructive", description: "Something went wrong"})
+      } finally {
+        setLoading(false)
       }
     };
 
     const onDelete = async () => {
       try {
+        setLoading(true)
         await axios.delete(`/api/games/${params.gameId}`);
         router.refresh();
         router.push("/admin/games");
         toast({ description: "Game deleted" })
       } catch (error) {
+        setLoading(false)
         toast({ variant: "destructive", description: "Game not deleted"})
+      } finally {
+        setLoading(false)
       }
     };
 
@@ -412,7 +420,10 @@ const GameForm: React.FC<GamesFormProps> = ({ initialData, categories }) => {
             )}
           />
 
-          <Button type="submit">{action}</Button>
+          <Button type="submit" disabled={loading}>
+            {loading && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}
+            {action}
+          </Button>
         </form>
       </Form>
     </>
