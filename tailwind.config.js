@@ -79,6 +79,7 @@ module.exports = {
         "cat-bg": "url('/cat-bg.jpg')",
         "catid-bg": "url('/pxfuel.jpg')",
         "games-bg": "url('/gamers.webp')",
+        "library-bg": "url('/library.jpg')",
       },
     },
   },

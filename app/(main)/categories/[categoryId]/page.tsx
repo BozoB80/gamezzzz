@@ -69,6 +69,7 @@ const CategoryIdPage = async ({ params, searchParams }: CategoryNameProps) => {
     'low-high': (a, b) => (a.discount ? a.price - (a.price * a.discount / 100) : a.price) - (b.discount ? b.price - (b.price * b.discount / 100) : b.price),
     'newest': (a, b) => b.releaseDate - a.releaseDate,
     'oldest': (a, b) => a.releaseDate - b.releaseDate,
+    'all': (a, b) => 0
   };
   
   if (sortOptions.hasOwnProperty(searchParams.sort)) {

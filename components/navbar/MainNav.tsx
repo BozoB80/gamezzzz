@@ -172,9 +172,9 @@ export const MainNav = ({ games, categories }: MainNavProps) => {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <Link href="/orders" legacyBehavior passHref>
+          <Link href="/library" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              ORDERS
+              MY LIBRARY
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
