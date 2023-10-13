@@ -15,6 +15,7 @@ import { Chip } from "@nextui-org/chip";
 import { formatLastPlayedDate } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/react";
+import Link from "next/link";
 
 interface LibraryCardProps {
   data: Game & {
@@ -67,9 +68,9 @@ const LibraryCard: React.FC<LibraryCardProps> = ({ data }) => {
       </div>
       <div className="relative ml-4 flex flex-1 flex-col justify-between sm:ml-6">
         <div className="flex justify-between items-center">
-          <div className="flex justify-between">
+          <Link href={`/games/${data.id}`} className="flex justify-between">
             <p className="text-lg font-semibold text-white/80">{data.title}</p>
-          </div>
+          </Link>
 
           <div className="max-md:hidden mt-1 flex text-sm text-white/70">
             <p>{data.category?.name}</p>

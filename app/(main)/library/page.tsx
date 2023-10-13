@@ -20,21 +20,26 @@ const LibraryPage = async ({ searchParams }: LibraryProps) => {
     where: {
       userId: userId,
       game: {
+        categoryId: searchParams.categoryId,
         title: {
-          contains: searchParams.title
-        }
+          contains: searchParams.title,
+          mode: "insensitive",
+        },
       }
     },
     include: {
       game: {
         include: {
           category: true
-        },
-      },
+        }
+      }
     },
   })
  
   let gamesList = orderedGames.map((game) => game.game)
+
+  console.log(orderedGames);
+  
    
 
   // Price filters
