@@ -14,30 +14,28 @@ interface LibraryProps {
 
 const LibraryPage = async ({ searchParams }: LibraryProps) => {
   const { userId } = auth()
-  if (!userId) return
+  if (!userId) return  
 
   const orderedGames = await prismadb.orderItem.findMany({
     where: {
-      userId: userId
+      userId: userId,
+      game: {
+        title: {
+          contains: searchParams.title
+        }
+      }
     },
     include: {
-      game: true
-    }
+      game: {
+        include: {
+          category: true
+        },
+      },
+    },
   })
-
-  
+ 
   let gamesList = orderedGames.map((game) => game.game)
-  
-
-  // let games = await prismadb.game.findMany({
-  //   where: {
-  //     categoryId: searchParams.categoryId,
-  //     title: {
-  //       contains: searchParams.title,
-  //       mode: "insensitive",
-  //     },
-  //   },
-  // });
+   
 
   // Price filters
   const priceFilters: Record<string, (game: Game) => boolean> = {
@@ -67,11 +65,10 @@ const LibraryPage = async ({ searchParams }: LibraryProps) => {
 
   const categories = await prismadb.category.findMany();
 
-
   return (
     <div className="bg-games-bg  bg-repeat bg-center min-h-screen p-0">
-      <div className="relative max-w-7xl mx-auto p-1 sm:p-4 xl:px-0 xl:py-4 space-y-4 h-full">
-        <h1 className="text-2xl sm:text-5xl lg:text-7xl font-bold text-center my-3 text-white/90 underline">
+      <div className="relative max-w-7xl mx-auto p-1 sm:p-4 xl:px-0 xl:py-4 space-y-4 text-white/90 h-full">
+        <h1 className="text-2xl sm:text-5xl lg:text-7xl font-bold text-center my-3 underline">
           Library
         </h1>
         <LibraryTabs games={gamesList} categories={categories} />

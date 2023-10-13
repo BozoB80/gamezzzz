@@ -70,7 +70,7 @@ const SortingFilters = ({ sortOption, setSortOption }: SortingFiltersProps) => {
     <div className="flex justify-center items-center">
       <Select defaultValue={sortOption} onValueChange={handleSortChange}>
       <h1 className="whitespace-nowrap">Sort by:</h1>
-        <SelectTrigger className="w-[120px] lg:w-[160px] text-sm lg:text-base text-white bg-transparent border-x-0 border-t-0 rounded-none focus:ring-offset-0">
+        <SelectTrigger className="w-[120px] lg:w-[160px] text-sm lg:text-base text-white/90 bg-transparent border-x-0 border-t-0 rounded-none focus:ring-offset-0">
           <SelectValue>
             {sortOption}          
           </SelectValue>

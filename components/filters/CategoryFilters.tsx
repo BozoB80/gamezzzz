@@ -81,7 +81,7 @@ const CategoryFilters: React.FC<FilterProps> = ({ data, name, valueKey }) => {
         },
       }}
     >
-      <AccordionItem aria-label="Accordion 1" title={<p className="lg:text-white text-md">Genres</p>}>
+      <AccordionItem aria-label="Accordion 1" title={<p className="lg:text-white/90 text-md">Genres</p>}>
         {data.map((filter) => (
           <div
             key={filter.id}

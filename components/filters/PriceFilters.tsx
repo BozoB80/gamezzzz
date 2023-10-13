@@ -91,7 +91,7 @@ const PriceFilters: React.FC<FilterProps> = ({ valueKey }) => {
     >
       <AccordionItem
         aria-label="Accordion 1"
-        title={<p className="lg:text-white text-md w-full lg:w-28">Price</p>}
+        title={<p className="lg:text-white/90 text-md w-full lg:w-28">Price</p>}
       >
         <div
           onClick={() => onClick("free")}

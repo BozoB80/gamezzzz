@@ -1,4 +1,4 @@
-import { Globe, LayoutDashboard, PanelLeftOpen, Store, Swords } from "lucide-react";
+import { Globe, LayoutDashboard, Library, PanelLeftOpen, Store, Swords } from "lucide-react";
 
 export const sidebarLinks = [
   {
@@ -45,8 +45,8 @@ export const mobileNavLinks = [
     label: "Categories",
   },  
   {
-    icon: Store,
-    route: "/orders",
-    label: "Orders",
+    icon: Library,
+    route: "/library",
+    label: "Library",
   },  
 ];
