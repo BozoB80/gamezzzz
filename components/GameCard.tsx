@@ -24,10 +24,9 @@ interface GameCardProps {
     images?: Images[];
   };
   isDeals?: boolean
-  wishlisted?: Wishlist[]
 }
 
-const GameCard: React.FC<GameCardProps> = ({ game, isDeals, wishlisted }) => {
+const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const discountedPrice = game.discount ? game.price - (game.price * game.discount / 100) : game.price;
 
@@ -94,7 +93,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals, wishlisted }) => {
             <AddToCartButton game={game} onClick={(e) => {
               e.stopPropagation()
             }} />
-            <WishlistButton game={game} wishlisted={wishlisted} />
+            <WishlistButton game={game} />
           </CardContent>
         </div>
       </Card>

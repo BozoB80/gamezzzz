@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { Form, FormField, FormItem } from "./ui/form";
 import axios from "axios";
 import { Game, Wishlist } from "@prisma/client";
+import { auth, currentUser } from '@clerk/nextjs';
 
 const formSchema = z.object({
   isWishlisted: z.boolean().default(false),
@@ -16,12 +17,11 @@ const formSchema = z.object({
 
 interface WishlistButtonProps {
   game: Game
-  wishlisted?: Wishlist[]
 }
 
-const WishlistButton = ({ game, wishlisted }: WishlistButtonProps) => {
+const WishlistButton = ({ game }: WishlistButtonProps) => {
   const [isWished, setIsWished] = useState(false)
-
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,13 +29,11 @@ const WishlistButton = ({ game, wishlisted }: WishlistButtonProps) => {
     },
   })
 
-  const wishId = wishlisted?.map((wish) => wish.id)
+  
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      if (wishlisted?.map((list) => list.gameId === game.id)) {
-        await axios.delete(`/api/wishlist/${wishId}`)
-      }
+      
     } catch (error) {
       
     }

@@ -18,7 +18,7 @@ const MobileMenu = () => {
   const router = useRouter();
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex lg:hidden items-center gap-4">
       <Dropdown
         placement="bottom-end"
         className="text-white/90 bg-muted-foreground rounded-xl"

@@ -8,7 +8,8 @@ const GamesIdPage = async ({ params }: { params: { gameId: string}}) => {
     },
     include: {
       images: true,
-      category: true
+      category: true,
+      wishlist: true
     }
   })
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Category, Game, Image as Images } from "@prisma/client";
+import { Category, Game, Image as Images, Wishlist } from "@prisma/client";
 import Container from "./Container";
 import Image from "next/image";
 import { Star, PlusCircleIcon } from "lucide-react";
@@ -18,6 +18,8 @@ interface GameDetailsProps {
     images: Images[];
   } & {
     category: Category
+  } & {
+    wishlist: Wishlist[]
   }
 }
 

@@ -9,9 +9,9 @@ import { X } from "lucide-react";
 import Image from "next/image";
 
 interface CartItemProps {
-  data: (Game & {
+  data: Game & {
     category?: Category
-  })
+  }
 }
 
 const CartItem: React.FC<CartItemProps> = ({ data }) => {
