@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Game, Image as Images, Wishlist } from "@prisma/client";
+import { Game, Image as Images } from "@prisma/client";
 import Image from "next/image";
 import { Separator } from "./ui/separator";
 import { useState } from "react";

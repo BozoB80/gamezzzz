@@ -106,4 +106,6 @@ model Wishlist {
   isWishlisted  Boolean
   gameId String @db.ObjectId
   game   Game   @relation(fields: [gameId], references: [id])
+
+  @@index([gameId])
 }

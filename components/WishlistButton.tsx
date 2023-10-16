@@ -10,18 +10,21 @@ import { Form, FormField, FormItem } from "./ui/form";
 import axios from "axios";
 import { Game, Wishlist } from "@prisma/client";
 import { auth, currentUser } from '@clerk/nextjs';
+import { useToast } from "./ui/use-toast";
 
 const formSchema = z.object({
   isWishlisted: z.boolean().default(false),
 })
 
 interface WishlistButtonProps {
-  game: Game
+  game: Game & {
+    wishlist: Wishlist[]
+  }
 }
 
 const WishlistButton = ({ game }: WishlistButtonProps) => {
-  const [isWished, setIsWished] = useState(false)
-  
+  const { toast } = useToast()
+    
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,13 +32,19 @@ const WishlistButton = ({ game }: WishlistButtonProps) => {
     },
   })
 
+  const isWished = game.wishlist.some((item) => item.isWishlisted)
+  console.log(isWished);
   
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       
-    } catch (error) {
+        await axios.post("/api/wishlist", data)
       
+
+      toast({ description: "Game added to wishlist" })
+    } catch (error) {
+      toast({ variant: "destructive", description: "Something went wrong"})
     }
   }
 

@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const { userId } = auth()
     const body = await req.json()
 
-    const { isWishlisted, game } = body
+    const { isWishlisted, gameId } = body
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 403 });
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       data: {
         isWishlisted,
         userId,
-        game                
+        gameId,             
       }
     })
 
