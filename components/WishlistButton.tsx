@@ -11,6 +11,7 @@ import { Game, Wishlist } from "@prisma/client";
 import { useToast } from "./ui/use-toast";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 const formSchema = z.object({
   isWishlisted: z.boolean().default(false),
@@ -26,6 +27,7 @@ interface WishlistButtonProps {
 const WishlistButton = ({ game }: WishlistButtonProps) => {
   const { toast } = useToast();
   const router = useRouter()
+  const { user } = useUser()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,10 +37,8 @@ const WishlistButton = ({ game }: WishlistButtonProps) => {
     },
   });
 
-  const isWished = game.wishlist?.some((item) => item.isWishlisted);
-  console.log(isWished);
+  const isWished = game.wishlist?.some((item) => item.isWishlisted && item.userId === user?.id);
   
-
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       if (!isWished) {
@@ -47,7 +47,7 @@ const WishlistButton = ({ game }: WishlistButtonProps) => {
         toast({ description: "Game added to wishlist" });
       } else {
         await axios.delete(`/api/wishlist/${game.id}`)
-        toast({ description: "Game removed from wishlist" });
+        toast({ variant: "destructive", description: "Game removed from wishlist" });
       }
       router.refresh()    
       

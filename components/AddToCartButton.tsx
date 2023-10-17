@@ -26,7 +26,7 @@ const AddToCartButton = ({ game, onClick }: AddToCartProps) => {
   }
 
   return (
-    <Button color="primary" radius="lg" size="lg" variant="solid" fullWidth onClick={onAdd} className="p-2 rounded-lg w-full flex justify-center items-center font-semibold text-lg">
+    <Button color="primary" radius="lg" size="lg" variant="solid" fullWidth onClick={onAdd} className="p-2 rounded-lg flex justify-center items-center font-semibold text-lg">
       <ShoppingBag className="w-4 h-4 mr-2" />
       <p>Add to cart</p>
     </Button>

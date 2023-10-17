@@ -1,7 +1,7 @@
 import LibraryTabs from "@/components/LibraryTabs";
 import prismadb from "@/lib/prismadb";
 import { Game } from "@prisma/client";
-import { auth, currentUser } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs';
 
 interface LibraryProps {
   searchParams: {
@@ -38,8 +38,28 @@ const LibraryPage = async ({ searchParams }: LibraryProps) => {
  
   let gamesList = orderedGames.map((game) => game.game)
 
-  console.log(orderedGames);
-  
+  const wishlistGames = await prismadb.wishlist.findMany({
+    where: {
+      userId: userId,
+      isWishlisted: true,
+      game: {
+        categoryId: searchParams.categoryId,
+        title: {
+          contains: searchParams.title,
+          mode: "insensitive",
+        },
+      }
+    },
+    include: {
+      game: {
+        include: {
+          category: true
+        }
+      }
+    }
+  })
+
+  let wishedGamesList = wishlistGames.map((game) => game.game)  
    
 
   // Price filters
@@ -54,6 +74,9 @@ const LibraryPage = async ({ searchParams }: LibraryProps) => {
   if (priceFilters.hasOwnProperty(searchParams.price)) {
     gamesList = gamesList.filter(priceFilters[searchParams.price]);
   }
+  if (priceFilters.hasOwnProperty(searchParams.price)) {
+    wishedGamesList = wishedGamesList.filter(priceFilters[searchParams.price]);
+  }
 
   // Sorting filters
   const sortOptions: { [key: string]: (a: Game, b: Game) => number } = {
@@ -67,6 +90,9 @@ const LibraryPage = async ({ searchParams }: LibraryProps) => {
   if (sortOptions.hasOwnProperty(searchParams.sort)) {
     gamesList.sort(sortOptions[searchParams.sort]);
   }
+  if (sortOptions.hasOwnProperty(searchParams.sort)) {
+    wishedGamesList.sort(sortOptions[searchParams.sort]);
+  }
 
   const categories = await prismadb.category.findMany();
 
@@ -76,7 +102,7 @@ const LibraryPage = async ({ searchParams }: LibraryProps) => {
         <h1 className="text-2xl sm:text-5xl lg:text-7xl font-bold text-center my-3 underline">
           Library
         </h1>
-        <LibraryTabs games={gamesList} categories={categories} />
+        <LibraryTabs games={gamesList} wishlistGames={wishedGamesList} categories={categories} />
       </div>
     </div>
   );

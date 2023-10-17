@@ -8,10 +8,11 @@ import LibraryCard from "./LibraryCard";
 
 interface LibraryTabsProps {
   games: Game[];
+  wishlistGames: Game[]
   categories: Category[];
 }
 
-const LibraryTabs = ({ games, categories }: LibraryTabsProps) => {
+const LibraryTabs = ({ games, wishlistGames, categories }: LibraryTabsProps) => {
   return (
     <Tabs defaultValue="orders" className="w-full transition">
       <TabsList className="flex justify center md:justify-end items-center max-md:bg-black/20">
@@ -43,6 +44,30 @@ const LibraryTabs = ({ games, categories }: LibraryTabsProps) => {
             <div className="flex flex-col w-full">
               {games.map((game) => (
                 <LibraryCard key={game.id} data={game} />
+              ))}
+            </div>
+          </div>
+        </>
+      </TabsContent>
+
+      <TabsContent value="wishlist">
+        <h1 className="text-slate-200 font-semibold text-2xl md:text-5xl">
+          Wishlist:
+        </h1>
+        <>
+          <FilterBar games={wishlistGames} categories={categories} />
+          <div className="flex flex-col lg:flex-row gap-x-4">
+            <div className="hidden lg:flex flex-col">
+              <CategoryFilters
+                name="Genres"
+                data={categories}
+                valueKey="categoryId"
+              />
+              <PriceFilters valueKey="price" />
+            </div>
+            <div className="flex flex-col w-full">
+              {wishlistGames.map((game) => (
+                <LibraryCard key={game.id} data={game} isWished />
               ))}
             </div>
           </div>

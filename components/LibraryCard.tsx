@@ -10,20 +10,22 @@ import {
 import { Progress } from "@nextui-org/progress";
 import { Category, Game } from "@prisma/client";
 import Image from "next/image";
-import { Download, MoreHorizontal } from "lucide-react";
+import { Download, Heart, MoreHorizontal } from "lucide-react";
 import { Chip } from "@nextui-org/chip";
 import { formatLastPlayedDate } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
+import AddToCartButton from "./AddToCartButton";
 
 interface LibraryCardProps {
   data: Game & {
     category?: Category;
   };
+  isWished?: boolean
 }
 
-const LibraryCard: React.FC<LibraryCardProps> = ({ data }) => {
+const LibraryCard: React.FC<LibraryCardProps> = ({ data, isWished }) => {
   const [randomPlayTime, setRandomPlayTime] = useState<number>(0);
   const [randomPlayedDate, setRandomPlayedDate] = useState<string>("");
   const [randomAchievments, setRamdomAchievments] = useState<number>(0);
@@ -79,71 +81,81 @@ const LibraryCard: React.FC<LibraryCardProps> = ({ data }) => {
             </p>
           </div>
 
-          <div className="flex items-center gap-4">
-            <Dropdown
-              placement="bottom-end"
-              className="text-white/90 bg-muted-foreground rounded-xl"
-              classNames={{
-                base: "bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
-              }}
-            >
-              <DropdownTrigger>
-                <MoreHorizontal className="cursor-pointer" />
-              </DropdownTrigger>
-              <DropdownMenu
-                aria-label="options"
-                itemClasses={{
-                  base: ["text-black", "data-[hover=true]:text-primary"],
-                }}
-              >
-                <DropdownItem key="store">Store Page</DropdownItem>
-                <DropdownItem key="forums">Forums</DropdownItem>
-                <DropdownItem key="groups">Groups</DropdownItem>
-                <DropdownItem key="web">Official Website</DropdownItem>
-                <DropdownItem key="news">News</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
+          {isWished ? (
+              <div className="flex justify-center items-center">
+                <Heart className="w-8 h-8 mr-2 text-green-500" fill="green" />
+                On your wishlist
+              </div>
+            ) : (
+              <div className="flex items-center gap-4">
+                <Dropdown
+                  placement="bottom-end"
+                  className="text-white/90 bg-muted-foreground rounded-xl"
+                  classNames={{
+                    base: "bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
+                  }}
+                >
+                  <DropdownTrigger>
+                    <MoreHorizontal className="cursor-pointer" />
+                  </DropdownTrigger>
+                  <DropdownMenu
+                    aria-label="options"
+                    itemClasses={{
+                      base: ["text-black", "data-[hover=true]:text-primary"],
+                    }}
+                  >
+                    <DropdownItem key="store">Store Page</DropdownItem>
+                    <DropdownItem key="forums">Forums</DropdownItem>
+                    <DropdownItem key="groups">Groups</DropdownItem>
+                    <DropdownItem key="web">Official Website</DropdownItem>
+                    <DropdownItem key="news">News</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
+            )
+          }
         </div>
 
-        <div className="flex max-md:flex-col max-md:justify-center max-md:p-4 max-md:gap-2 justify-start items-center md:space-x-6">
-          <Chip
-            variant="shadow"
-            classNames={{
-              base: "bg-gradient-to-br from-yellow-300 to-yellow-700 border-small border-white/50 shadow-pink-500/30",
-              content: "drop-shadow shadow-black text-white",
-            }}
-          >
-            <span className="uppercase text-sm">Total played:</span>{" "}
-            {randomPlayTime} hours
-          </Chip>
-          <Chip
-            variant="shadow"
-            classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
-              content: "drop-shadow shadow-black text-white",
-            }}
-          >
-            <span className="uppercase text-sm">Last played:</span>{" "}
-            {randomPlayedDate}
-          </Chip>
-          <Progress
-            size="sm"
-            radius="lg"
-            classNames={{
-              base: "max-w-xs",
-              track: "drop-shadow-md border border-white/60",
-              indicator: "bg-gradient-to-r from-yellow-400 to-yellow-500",
-              label: "tracking-wider font-medium text-white/90",
-              value: "text-white/90",
-            }}
-            label="Achievements"
-            minValue={1}
-            maxValue={184}
-            value={randomAchievments}
-            showValueLabel={true}
-          />
-        </div>
+        {!isWished && (
+          <div className="flex max-md:flex-col max-md:justify-center max-md:p-4 max-md:gap-2 justify-start items-center md:space-x-6">
+            <Chip
+              variant="shadow"
+              classNames={{
+                base: "bg-gradient-to-br from-yellow-300 to-yellow-700 border-small border-white/50 shadow-pink-500/30",
+                content: "drop-shadow shadow-black text-white",
+              }}
+            >
+              <span className="uppercase text-sm">Total played:</span>{" "}
+              {randomPlayTime} hours
+            </Chip>
+            <Chip
+              variant="shadow"
+              classNames={{
+                base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+                content: "drop-shadow shadow-black text-white",
+              }}
+            >
+              <span className="uppercase text-sm">Last played:</span>{" "}
+              {randomPlayedDate}
+            </Chip>
+            <Progress
+              size="sm"
+              radius="lg"
+              classNames={{
+                base: "max-w-xs",
+                track: "drop-shadow-md border border-white/60",
+                indicator: "bg-gradient-to-r from-yellow-400 to-yellow-500",
+                label: "tracking-wider font-medium text-white/90",
+                value: "text-white/90",
+              }}
+              label="Achievements"
+              minValue={1}
+              maxValue={184}
+              value={randomAchievments}
+              showValueLabel={true}
+            />
+          </div>
+        )}
 
         <div className="max-md:hidden flex justify-between items-center">
           <p className="text-white/70 max-sm:hidden">Rating: {data.rating}</p>
@@ -162,13 +174,19 @@ const LibraryCard: React.FC<LibraryCardProps> = ({ data }) => {
               ""
             )}
           </div>
-          <Button
-            variant="bordered"
-            startContent={<Download className="mr-2" />}
-            className="border border-primary text-white/90 px-3 py-2 rounded-md hover:text-primary"
-          >
-            Install
-          </Button>
+          {isWished ? (
+            <div>
+              <AddToCartButton game={data} />
+            </div>
+          ) : (
+            <Button
+              variant="bordered"
+              startContent={<Download className="mr-2" />}
+              className="border border-primary text-white/90 px-3 py-2 rounded-md hover:text-primary"
+            >
+              Install
+            </Button>
+          )}
         </div>
       </div>
     </div>
