@@ -16,6 +16,9 @@ export default async function Home() {
         not: 0
       }
     },
+    include: {
+      wishlist: true
+    },
     orderBy: {
       price: "desc"
     }

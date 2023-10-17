@@ -102,7 +102,7 @@ model StripeCustomer {
 
 model Wishlist {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @unique
+  userId String
   isWishlisted  Boolean
   gameId String @db.ObjectId
   game   Game   @relation(fields: [gameId], references: [id])
