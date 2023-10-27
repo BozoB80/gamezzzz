@@ -88,7 +88,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
               {game.description}
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-2">
             <Separator className="my-2" />
             <AddToCartButton game={game} onClick={(e) => {
               e.stopPropagation()

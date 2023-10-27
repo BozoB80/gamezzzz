@@ -16,8 +16,8 @@ const FilterNumber = ({ setValue, setSortOption }: FilterNumberProps) => {
 
   const resetSearchParams = () => {
     router.replace(pathname)
-    setValue("")
     setSortOption("All")
+    setValue("")
     router.refresh()
   };
 

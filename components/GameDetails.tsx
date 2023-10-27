@@ -91,7 +91,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({ game }: GameDetailsProps) => 
             )}
           </CardTitle>
           <Separator className="my-4" />
-          <CardContent className="w-full p-0">
+          <CardContent className="w-full p-0 space-y-2">
             <AddToCartButton game={game} />
             <WishlistButton game={game} />
           </CardContent>
