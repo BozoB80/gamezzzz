@@ -31,7 +31,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
   const discountedPrice = game.discount ? game.price - (game.price * game.discount / 100) : game.price;
 
   const handleCardFlip = () => {
-    setIsFlipped(!isFlipped);
+    setIsFlipped((prev) => !prev);
   };
 
   return (
@@ -80,7 +80,8 @@ const GameCard: React.FC<GameCardProps> = ({ game, isDeals }) => {
             </CardFooter>
           </CardContent>
         </div>
-        <div className="card-inner-back">
+
+        <div className="card-inner-back transition-all">
           <CardHeader>
             <CardTitle className="text-xl">{game.title}</CardTitle>
             <Separator className="my-2" />
